@@ -13,7 +13,7 @@ class CreateMesaTable extends Migration
      */
     public function up()
     {
-        Schema::create('Usuarios', function (Blueprint $table) {
+       /* Schema::create('Usuarios', function (Blueprint $table) {
             $table->increments('id');
             $table->string('login');
             $table->string('password');
@@ -22,17 +22,24 @@ class CreateMesaTable extends Migration
             $table->string('email');
             $table->foreign('perfil')->references('id')->on('Perfil');
             $table->timestamps();
-        });
+        })*/;
 
         Schema::create('Perfil', function (Blueprint $table){
             $table->increments('id');
-            $table->string('nombre');
-            $table->integer('permisos');
+            $table->string('nombrePerfil');
+
         });
 
         Schema::create('Estados', function (Blueprint $table){
             $table->increments('id');
             $table->string('estado');
+        });
+
+        Schema::create('Areas', function (Blueprint $table){
+            $table->increments('id');
+            $table->string('area');
+            $table->integer('responsable')->unsigned();
+            $table->foreign('responsable')->references('id')->on('users');
         });
 
         Schema::create('Expedientes', function (Blueprint $table){
@@ -42,54 +49,69 @@ class CreateMesaTable extends Migration
             $table->dateTime('fecha_alta');
             $table->dateTime('facha_caducidad');
             $table->dateTime('fecha_resolucion');
+            $table->integer('area')->unsigned();
             $table->foreign('area')->references('id')->on('Areas');
             $table->string('asunto');
             $table->float('presupuesto');
+            $table->integer('estado')->unsigned();
             $table->foreign('estado')->references('id')->on('Estados');
             $table->string('lugar');
+            $table->integer('usuario')->unsigned();
+            $table->foreign('usuario')->references('id')->on('users');
         });
 
-        Schema::create('Comentario_exp', function (Blueprint $table){
+        Schema::create('ComentarioExp', function (Blueprint $table){
             $table->increments('id');
+            $table->integer('expediente')->unsigned();
             $table->foreign('expediente')->references('id')->on('Expedientes');
             $table->string('comentario');
         });
 
-        Schema::create('Areas', function (Blueprint $table){
-           $table->increments('id');
-           $table->string('area');
-           $table->foreign('responsable')->referecnces('id')->on('Usuarios');
-        });
 
-        Schema::create('Nube_Palabras', function(Blueprint $table){
+
+        Schema::create('NubePalabras', function(Blueprint $table){
             $table->increments('id');
             $table->string('palabra');
         });
 
         Schema::create('PalabrasXExp', function (Blueprint $table){
             $table->increments('id');
+            $table->integer('exp')->unsigned();
             $table->foreign('exp')->references('id')->on('Expedientes');
-            $table->foreign('palabra')->references('id')->on('Nube_Palabras');
+            $table->integer('palabra')->unsigned();
+            $table->foreign('palabra')->references('id')->on('NubePalabras');
 
         });
 
         Schema::create('ExpRecorrido', function(Blueprint $table){
             $table->increments('id');
+            $table->integer('expediente')->unsigned();
             $table->foreign('expediente')->references('id')->on('Expedientes');
+            $table->integer('area')->unsigned();
             $table->foreign('area')->references('id')->on('Areas');
             $table->dateTime('fechaIngreso');
+            $table->integer('estado')->unsigned();
             $table->foreign('estado')->references('id')->on('Estados');
         });
 
         Schema::create('UsuarioxArea', function (Blueprint $table){
             $table->increments('id');
-            $table->foreign('usuario')->references('id')->on('Usuarios');
+            $table->integer('usuario')->unsigned();
+            $table->foreign('usuario')->references('id')->on('users');
         });
 
         Schema::create('Files', function (Blueprint $table){
             $table->increments('id');
+            $table->integer('expediente')->unsigned();
             $table->foreign('expediente')->references('id')->on('Expedientes');
             $table->string('Path');
+        });
+
+        Schema::create('EstadosFiles', function (Blueprint $table){
+            $table->increments('id');
+            $table->integer('files')->unsigned();
+            $table->foreign('files')->references('id')->on('Files');
+
         });
 
         
