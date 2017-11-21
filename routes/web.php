@@ -12,5 +12,9 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('default');
+});
+
+Route::get('/MesaDeEntradas', function(){
+    return view('mesadeentradas');
 });

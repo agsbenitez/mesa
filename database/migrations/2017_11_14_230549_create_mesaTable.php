@@ -24,25 +24,25 @@ class CreateMesaTable extends Migration
             $table->timestamps();
         })*/;
 
-        Schema::create('Perfil', function (Blueprint $table){
+        Schema::create('perfil', function (Blueprint $table){
             $table->increments('id');
             $table->string('nombrePerfil');
 
         });
 
-        Schema::create('Estados', function (Blueprint $table){
+        Schema::create('estados', function (Blueprint $table){
             $table->increments('id');
             $table->string('estado');
         });
 
-        Schema::create('Areas', function (Blueprint $table){
+        Schema::create('areas', function (Blueprint $table){
             $table->increments('id');
             $table->string('area');
             $table->integer('responsable')->unsigned();
             $table->foreign('responsable')->references('id')->on('users');
         });
 
-        Schema::create('Expedientes', function (Blueprint $table){
+        Schema::create('expedientes', function (Blueprint $table){
             $table->increments('id');
             $table->string('comitente');
             $table->string('destinatario');
@@ -50,67 +50,69 @@ class CreateMesaTable extends Migration
             $table->dateTime('facha_caducidad');
             $table->dateTime('fecha_resolucion');
             $table->integer('area')->unsigned();
-            $table->foreign('area')->references('id')->on('Areas');
+            $table->foreign('area')->references('id')->on('areas');
             $table->string('asunto');
             $table->float('presupuesto');
             $table->integer('estado')->unsigned();
-            $table->foreign('estado')->references('id')->on('Estados');
+            $table->foreign('estado')->references('id')->on('estados');
             $table->string('lugar');
             $table->integer('usuario')->unsigned();
             $table->foreign('usuario')->references('id')->on('users');
+            $table->timestamps();
+            $table->softDeletes();
         });
 
-        Schema::create('ComentarioExp', function (Blueprint $table){
+        Schema::create('comentarioExp', function (Blueprint $table){
             $table->increments('id');
             $table->integer('expediente')->unsigned();
-            $table->foreign('expediente')->references('id')->on('Expedientes');
+            $table->foreign('expediente')->references('id')->on('expedientes');
             $table->string('comentario');
         });
 
 
 
-        Schema::create('NubePalabras', function(Blueprint $table){
+        Schema::create('nubePalabras', function(Blueprint $table){
             $table->increments('id');
             $table->string('palabra');
         });
 
-        Schema::create('PalabrasXExp', function (Blueprint $table){
+        Schema::create('palabrasXExp', function (Blueprint $table){
             $table->increments('id');
             $table->integer('exp')->unsigned();
-            $table->foreign('exp')->references('id')->on('Expedientes');
+            $table->foreign('exp')->references('id')->on('expedientes');
             $table->integer('palabra')->unsigned();
-            $table->foreign('palabra')->references('id')->on('NubePalabras');
+            $table->foreign('palabra')->references('id')->on('nubePalabras');
 
         });
 
-        Schema::create('ExpRecorrido', function(Blueprint $table){
+        Schema::create('expRecorrido', function(Blueprint $table){
             $table->increments('id');
             $table->integer('expediente')->unsigned();
-            $table->foreign('expediente')->references('id')->on('Expedientes');
+            $table->foreign('expediente')->references('id')->on('expedientes');
             $table->integer('area')->unsigned();
-            $table->foreign('area')->references('id')->on('Areas');
+            $table->foreign('area')->references('id')->on('areas');
             $table->dateTime('fechaIngreso');
             $table->integer('estado')->unsigned();
-            $table->foreign('estado')->references('id')->on('Estados');
+            $table->foreign('estado')->references('id')->on('estados');
         });
 
-        Schema::create('UsuarioxArea', function (Blueprint $table){
+        Schema::create('usuarioxArea', function (Blueprint $table){
             $table->increments('id');
             $table->integer('usuario')->unsigned();
             $table->foreign('usuario')->references('id')->on('users');
         });
 
-        Schema::create('Files', function (Blueprint $table){
+        Schema::create('files', function (Blueprint $table){
             $table->increments('id');
             $table->integer('expediente')->unsigned();
-            $table->foreign('expediente')->references('id')->on('Expedientes');
+            $table->foreign('expediente')->references('id')->on('expedientes');
             $table->string('Path');
         });
 
-        Schema::create('EstadosFiles', function (Blueprint $table){
+        Schema::create('estadosFiles', function (Blueprint $table){
             $table->increments('id');
             $table->integer('files')->unsigned();
-            $table->foreign('files')->references('id')->on('Files');
+            $table->foreign('files')->references('id')->on('files');
 
         });
 
@@ -126,6 +128,16 @@ class CreateMesaTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::drop('perfil');
+        Schema::drop('estados');
+        Schema::drop('areas');
+        Schema::drop('expedientes');
+        Schema::drop('comentarioExp');
+        Schema::drop('nubePalabras');
+        Schema::drop('palabrasXExp');
+        Schema::drop('expRecorrido');
+        Schema::drop('usuarioxArea');
+        Schema::drop('files');
+        Schema::drop('estadosFiles');
     }
 }
