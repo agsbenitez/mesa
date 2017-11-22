@@ -24,7 +24,7 @@ $factory->define(App\Expediente::class, function (Faker $faker) {
         'facha_caducidad' =>$faker->dateTime(),
         'area'=>Area::inRandomOrder()->first()->id,
         'asunto'=>$faker->realText(100),
-        'presupuesto'=>$faker->randomFloat(),
+        'presupuesto'=>$faker->randomFloat($nbMaxDecimals = null, $min = 0, $max = 100),
         'estado'=>Estado::inRandomOrder()->first()->id,
         'lugar'=>$faker->realText(),
         'usuario'=>User::inRandomOrder()->first()->id,

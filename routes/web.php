@@ -18,3 +18,13 @@ Route::get('/', function () {
 Route::get('/MesaDeEntradas', function(){
     return view('mesadeentradas');
 });
+
+Route::resource('datatables', 'DatatablesController', [
+    'anyData' => 'datatables.data',
+    'getIndex' => 'datables',
+
+]);
+
+Route::get('datatables', 'DatatablesController@index');
+Route::get('/anyData', 'DatatablesController@anyData')->name('datatable.anyData');
+

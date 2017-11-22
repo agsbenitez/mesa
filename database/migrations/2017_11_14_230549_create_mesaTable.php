@@ -48,7 +48,7 @@ class CreateMesaTable extends Migration
             $table->string('destinatario');
             $table->dateTime('fecha_alta');
             $table->dateTime('facha_caducidad');
-            $table->dateTime('fecha_resolucion');
+            $table->dateTime('fecha_resolucion')->nullable();
             $table->integer('area')->unsigned();
             $table->foreign('area')->references('id')->on('areas');
             $table->string('asunto');
