@@ -13,10 +13,18 @@ class DatatablesController extends Controller
 
     }
     public function getIndex(){
-        return view('mesadeentradas');
+        //return view('mesadeentradas');
+        $usuarios = User::select(['id','name', 'created_at', 'updated_at']);
+        dd($usuarios);
+        return Datatables::of($usuarios)
+            ->make(true);
     }
 
-    public function anyData(){
-        return DataTables::of(User::query())->make(true);
+    public function anyData(Request $request){
+        dd($request);
+        $a = DataTables::of(User::query())->make(true);
+        return view('vista')
+            ->with('Data', $a);
     }
+
 }

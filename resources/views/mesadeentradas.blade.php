@@ -5,7 +5,7 @@
 
 @section('content')
     <h1>Hola Mesa de Entradas</h1>
-    <table class="table table-bordered" id="users-ttable">
+    <table class="table table-bordered" id="users-table">
         <thead>
             <tr>
                 <th>Id</th>
@@ -16,25 +16,26 @@
             </tr>
         </thead>
     </table>
-@stop
 
-@push('scripts')
-    <script>
-        $(function () {
-            $('#users-table').DataTable({
-                processing: true,
-                serverSide: true,
-                ajax: "{{route(datatable.anyData)}}",
-                columns: [
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            aTable = $('#users-table').DataTable({
+                "processing": true,
+                "serverSide": true,
+                "ajax": "{{route('datatable.getIndex')}}",
+
+                "columns": [
                     {data: 'id', name: 'id'},
                     {data: 'name', name: 'name'},
-                    {data: 'create_at', name: 'create_at'},
+                    {data: 'created_at', name: 'created_at'},
                     {data: 'updated_at', name: 'updated_at'}
                 ]
             });
 
         });
     </script>
-@endpush
+
 @endsection
 
