@@ -1,7 +1,8 @@
-@extends('layout')
+@extends('default')
 
 @section('menu')
     acá va el menú
+@endsection
 
 @section('content')
     <h1>Hola Mesa de Entradas</h1>

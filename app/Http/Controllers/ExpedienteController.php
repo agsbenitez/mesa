@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Expediente;
 use Illuminate\Http\Request;
 
 class ExpedienteController extends Controller
@@ -13,7 +14,9 @@ class ExpedienteController extends Controller
      */
     public function index()
     {
-        //
+        $Exp = Expediente::get();
+
+        return $Exp;
     }
 
     /**
@@ -45,7 +48,7 @@ class ExpedienteController extends Controller
      */
     public function show($id)
     {
-        //
+
     }
 
     /**
@@ -56,7 +59,9 @@ class ExpedienteController extends Controller
      */
     public function edit($id)
     {
-        //
+        $Exp = Expediente::findOrFail($id);
+        //Formulario
+        return $Exp;
     }
 
     /**
@@ -79,6 +84,8 @@ class ExpedienteController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $Exp = Expediente::findOrFail($id);
+        //Formulario
+        $Exp-;
     }
 }

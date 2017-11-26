@@ -18,12 +18,11 @@ Route::get('/', function () {
 Route::get('/MesaDeEntradas', function(){
     return view('mesadeentradas');
 });
-//
-//Route::resource('datatables', 'DatatablesController', [
-//    'anyData' => 'datatables.data',
-//    'getIndex' => 'datables',
-//
-//]);
+Route::get('/vue', function(){
+    return view('dash');
+});
+Route::resource('expediente', 'ExpedienteController');
+
 
 Route::get('datatables', 'DatatablesController@index');
 Route::get('/Data', 'DatatablesController@getIndex')->name('datatable.getIndex');

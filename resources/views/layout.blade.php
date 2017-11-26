@@ -11,8 +11,10 @@
     <!--<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">-->
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="description" content="Fireworks Splice HTML">
+    <meta name="csrf-token" content="{{csrf_token()}}">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
           integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+    <link href="{{asset('css/app.css')}}" rel="stylesheet">
 
     <!--Importo librerias DataTable -->
     {{--<link rel="stylesheet" href="//cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js">--}}
@@ -37,7 +39,9 @@
 </head>
 
 <body bgcolor="#cccccc" onload="" topmargin="0" leftmargin="0" >
+
     <div class="flex-center position-ref full-height">
+        @section('portal')
         <div class="top-right links">
             {{--<a href="{{ route('home') }}">Home</a>--}}
             {{--<a href="{{ route('section.index') }}">Sections</a>--}}
@@ -67,5 +71,5 @@
     </div>
 
 </body>
-
+<script src="{{asset('js/app.js')}}"></script>
 </html>
