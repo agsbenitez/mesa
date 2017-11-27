@@ -11,8 +11,8 @@ class Expediente extends Model
         return $this->belongsTo('App\Area')->first();
     }
 
-    public function getExpDesc(){
-        return DB::table('expediente')
+    public static function getExpDesc(){
+        return DB::table('Expediente')
             ->orderByDesc('id')
             ->get();
     }

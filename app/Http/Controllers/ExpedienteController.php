@@ -16,6 +16,7 @@ class ExpedienteController extends Controller
     {
         $Exp = Expediente::get();
 
+
         return $Exp;
     }
 
@@ -84,8 +85,8 @@ class ExpedienteController extends Controller
      */
     public function destroy($id)
     {
-        $Exp = Expediente::findOrFail($id);
+        //$Exp = Expediente::findOrFail($id);
         //Formulario
-        $Exp-;
+        //$Exp
     }
 }

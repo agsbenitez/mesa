@@ -35,7 +35,7 @@
                         <td width="50px">{{exp.comitente}}</td>
                         <td width="50px">{{exp.destinatario}}</td>
                         <td width="10px">{{exp.fecha_alta}}</td>
-                        <td width="10px">{{exp.area}}</td>
+                        <td width="10px"v-bind="getArea(exp.area)">{{area}}</td>
                         <td width="10px">
                             <a href="#" class="btn btn-warning btn-sm">Edit</a>
                         </td>
@@ -49,12 +49,7 @@
             </table>
         </div>
         <div class="col-sm-2">
-            <div v-for="exp in expediente">
-
-
-
-            </div>
-
+            {{area}}
 
         </div>
     </div>
@@ -65,28 +60,48 @@
          data(){
              return {
                  "expediente": [],
+                 "area": [],
+                 "id":null
                  }
          },
 
          created: function(){
-             this.getExp(1);
+             this.getExp();
+
          },
+
 
          mounted()
              {
                  console.log('Componente montado')
              },
+         computed:{
+
+         },
 
          methods: {
                  getExp: function () {
                      var url = '/expediente';
                      axios.get(url).then(response=>{
                          this.expediente = response.data;
+
                      }).catch((error)=>{
                          console.log(error);
                      });
 
+                 },
+                 getArea: function(id){
+                     var url = '/area/' + id;
+                     console.log(url);
+                     axios.get(url).then(response=>{
+                         this.area = response.data.area;
+
+                     }).catch((error)=>{
+                         console.log(error)
+                     });
                  }
+
+
          }
 
      }

@@ -42980,28 +42980,26 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
-            "expediente": []
+            "expediente": [],
+            "area": [],
+            "id": null
         };
     },
 
 
     created: function created() {
-        this.getExp(1);
+        this.getExp();
     },
 
     mounted: function mounted() {
         console.log('Componente montado');
     },
 
+    computed: {},
 
     methods: {
         getExp: function getExp() {
@@ -43013,7 +43011,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }).catch(function (error) {
                 console.log(error);
             });
+        },
+        getArea: function getArea(id) {
+            var _this2 = this;
+
+            var url = '/area/' + id;
+            console.log(url);
+            axios.get(url).then(function (response) {
+                _this2.area = response.data.area;
+            }).catch(function (error) {
+                console.log(eeror);
+            });
         }
+
     }
 
 });
@@ -43057,9 +43067,16 @@ var render = function() {
                 _vm._v(_vm._s(exp.fecha_alta))
               ]),
               _vm._v(" "),
-              _c("td", { attrs: { width: "10px" } }, [
-                _vm._v(_vm._s(exp.area))
-              ]),
+              _c(
+                "td",
+                _vm._b(
+                  { attrs: { width: "10px" } },
+                  "td",
+                  _vm.getArea(exp.area),
+                  false
+                ),
+                [_vm._v(_vm._s(_vm.area))]
+              ),
               _vm._v(" "),
               _vm._m(2, true, false),
               _vm._v(" "),
@@ -43070,13 +43087,9 @@ var render = function() {
       ])
     ]),
     _vm._v(" "),
-    _c(
-      "div",
-      { staticClass: "col-sm-2" },
-      _vm._l(_vm.expediente, function(exp) {
-        return _c("div")
-      })
-    )
+    _c("div", { staticClass: "col-sm-2" }, [
+      _vm._v("\n        " + _vm._s(_vm.area) + "\n\n    ")
+    ])
   ])
 }
 var staticRenderFns = [

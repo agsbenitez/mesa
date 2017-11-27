@@ -16,12 +16,13 @@ Route::get('/', function () {
 });
 
 Route::get('/MesaDeEntradas', function(){
-    return view('mesadeentradas');
+    return view('dash');
 });
 Route::get('/vue', function(){
     return view('dash');
 });
 Route::resource('expediente', 'ExpedienteController');
+Route::resource('area', 'AreaController');
 
 
 Route::get('datatables', 'DatatablesController@index');

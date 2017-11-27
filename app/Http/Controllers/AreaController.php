@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Area;
 
 class AreaController extends Controller
 {
@@ -45,7 +46,9 @@ class AreaController extends Controller
      */
     public function show($id)
     {
-        //
+        $area = Area::find($id);
+
+        return $area;
     }
 
     /**
