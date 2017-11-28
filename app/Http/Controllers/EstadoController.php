@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Estado;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 
 class EstadoController extends Controller
@@ -13,7 +15,10 @@ class EstadoController extends Controller
      */
     public function index()
     {
-        //
+        $estado = Estado::get();
+
+
+        return $estado;
     }
 
     /**
@@ -77,8 +82,15 @@ class EstadoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Estado $id)
     {
-        //
+        dd($id);
+        $estado = Estado::find($id);
+
+            $estado->delete();
+            $msg= "Estado eliminado";
+
+
+        return $msg;
     }
 }

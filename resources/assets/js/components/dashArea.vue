@@ -1,5 +1,5 @@
 <template>
-    <div  class="row">
+    <div id="app" class="row">
         <div class="col-xs-12">
             <h1 class="page-header">Expedientes</h1>
         </div>

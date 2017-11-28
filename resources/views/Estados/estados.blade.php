@@ -5,10 +5,11 @@
 @endsection
 
 @section('content')
-    <h1>Hola Mesa de Entradas</h1>
+    <h1>Estados</h1>
     <div id="app">
-        <dash></dash>
+        <dashEstados></dashEstados>
     </div>
+
 
 
 @endsection

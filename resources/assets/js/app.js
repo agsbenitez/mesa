@@ -17,7 +17,10 @@ window.Vue = require('vue');
 
 Vue.component('example', require('./components/Example.vue'));
 Vue.component('dash', require('./components/dash.vue'));
+Vue.component('dashArea', require('./components/dashArea.vue'));
+Vue.component('dashestados', require('./components/dashestados.vue'));
 
 const app = new Vue({
     el: '#app'
 });
+

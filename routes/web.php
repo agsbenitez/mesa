@@ -16,15 +16,27 @@ Route::get('/', function () {
 });
 
 Route::get('/MesaDeEntradas', function(){
-    return view('dash');
+    return view('mesadeentradas');
 });
+Route::get('estados', function (){
+    return view('Estados/estados');
+});
+
+
 Route::get('/vue', function(){
     return view('dash');
 });
 Route::resource('expediente', 'ExpedienteController');
 Route::resource('area', 'AreaController');
+Route::resource('estado', 'EstadoController');
 
 
 Route::get('datatables', 'DatatablesController@index');
 Route::get('/Data', 'DatatablesController@getIndex')->name('datatable.getIndex');
+
+
+
+Route::get('grid', function (){
+    return view('grilla');
+});
 
