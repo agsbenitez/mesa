@@ -7,8 +7,8 @@ use Illuminate\Support\Facades\DB;
 
 class Expediente extends Model
 {
-    public function area(){
-        return $this->belongsTo('App\Area')->first();
+    public function are(){
+        return $this->belongsTo('App\Area','area')->first();
     }
 
     public static function getExpDesc(){
@@ -16,4 +16,11 @@ class Expediente extends Model
             ->orderByDesc('id')
             ->get();
     }
+
+    //se crea este metodo para insertar en la responce los datos del area como u nuevo campo fullarea
+    protected $appends= ["fullarea"];
+
+    public function getFullareaAttribute(){
+        return $this->are();
+}
 }

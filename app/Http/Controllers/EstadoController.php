@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Estado;
 use Illuminate\Database\QueryException;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class EstadoController extends Controller
@@ -82,13 +83,18 @@ class EstadoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Estado $id)
+    public function destroy($id)
     {
-        dd($id);
         $estado = Estado::find($id);
 
+        try{
             $estado->delete();
             $msg= "Estado eliminado";
+        }catch (\Exception $e){
+            $msg=$e->getMessage();
+            return new JsonResponse($msg, 500);
+        }
+
 
 
         return $msg;

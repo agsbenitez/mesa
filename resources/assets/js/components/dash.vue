@@ -5,7 +5,7 @@
         </div>
         <div class="col-sm-10">
             <a href="#" class="btn btn-primary pull-right">Nuevo Expedidnte</a>
-            <table class="table table-hover table-striped">
+            <table class="table table-fixed table-hover table-striped">
                 <thead>
                 <tr>
                     <th>
@@ -35,8 +35,8 @@
                         <td width="50px">{{exp.comitente}}</td>
                         <td width="50px">{{exp.destinatario}}</td>
                         <td width="10px">{{exp.fecha_alta}}</td>
-                        <!--<td width="10px"v-bind="getArea(exp.area)">{{area}}</td>-->
-                        <td width="50px">El Area</td>
+                        <td width="10px">{{exp.fullarea.area}}</td>
+                        <!--<td width="50px">El Area</td>-->
                         <td width="10px">
                             <a href="#" class="btn btn-warning btn-sm">Edit</a>
                         </td>
@@ -50,7 +50,7 @@
             </table>
         </div>
         <div class="col-sm-2">
-            {{area}}
+
 
         </div>
     </div>

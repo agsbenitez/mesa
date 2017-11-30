@@ -4,7 +4,7 @@
             <h1 class="page-header">Estados</h1>
         </div>
         <div class="col-sm-10">
-            <a href="#" class="btn btn-primary pull-right" data-toggle="modal" data-target="#create">
+            <a href="#" class="btn btn-primary pull-right" data-toggle="modal" data-target="#create">-->
                 Nuevo Estado
             </a>
             <table class="table table-hover table-striped">
@@ -39,7 +39,7 @@
                 </tbody>
 
             </table>
-            <InputWidget label="Titulo" v-on:inputValue="setTitle" />
+            <!--<InputWidget label="Titulo" v-on:inputValue="setTitle" />-->
 
         </div>
         <div class="col-sm-2">
@@ -49,7 +49,7 @@
 </template>
 
 <script>
-    import InputWidget from './forms-fields/input';
+
      export default {
          data(){
              return {
@@ -90,7 +90,8 @@
                         this.getEstados();
 
                     }).catch((error)=>{
-                        console.log(error);
+                        console.log(error)
+                        toastr.warning(error.response.status);
                  });
              }
 
