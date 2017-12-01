@@ -43888,6 +43888,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 //    import ventana from './forms-fields/expnew';
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -43899,7 +43914,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             "expediente": [],
             "areas": [],
             "id": null,
-            "newExpediente": null,
+            "newExpediente": [{
+                "asunto": "",
+                "comitente": "",
+                "destinatario": "",
+                "fechaAlta": "",
+                "fechaHasta": "",
+                "area": "",
+                "presupuesto": "",
+                "lugar": "",
+                "comentario": "",
+                "tags": ""
+            }],
             "errors": []
         };
     },
@@ -43937,8 +43963,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 console.log(error);
             });
         },
-        UpdateValue: function UpdateValue() {
-            toastr.success('Datos Actualizados');
+        UpdateValue: function UpdateValue(newExpediente) {
+            console.log(newExpediente);
+            $('#create').modal('hide');
         },
 
         createExp: function createExp() {
@@ -44019,97 +44046,374 @@ var render = function() {
         )
       ]),
       _vm._v(" "),
-      _c("h2", [_vm._v("Areas:" + _vm._s(_vm.areas))])
+      _c("h4", [_vm._v("Expediente Nuevo: " + _vm._s(_vm.newExpediente))])
     ]),
     _vm._v(" "),
-    _c("div", { staticClass: "col-sm-2" }, [
-      _c("div", { staticClass: "modal fade", attrs: { id: "create" } }, [
-        _c("div", { staticClass: "modal-dialog" }, [
-          _c("div", { staticClass: "modal-content" }, [
-            _c("div", { staticClass: "modal-header" }, [
-              _vm._m(4, false, false),
-              _vm._v(" "),
-              _c("h4", [_vm._v("Nuevo Expediente")]),
-              _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "modal-body" },
-                [
-                  _c("label", { attrs: { for: "comitente" } }, [
-                    _vm._v("Comitente")
-                  ]),
+    _c("div", { staticClass: "row" }, [
+      _c(
+        "form",
+        {
+          attrs: { method: "post" },
+          on: {
+            submit: function($event) {
+              $event.preventDefault()
+              _vm.UpdateValue($event)
+            }
+          }
+        },
+        [
+          _c("div", { staticClass: "modal fade", attrs: { id: "create" } }, [
+            _c("div", { staticClass: "modal-dialog modal-lg" }, [
+              _c("div", { staticClass: "modal-content" }, [
+                _c("div", { staticClass: "modal-header" }, [
+                  _vm._m(4, false, false),
                   _vm._v(" "),
-                  _c("input", {
-                    staticClass: "form-control",
-                    attrs: { type: "text", name: "comitente" },
-                    on: { input: _vm.UpdateValue }
-                  }),
-                  _vm._v(" "),
-                  _c("label", { attrs: { for: "destinatario" } }, [
-                    _vm._v("Destinatario")
-                  ]),
-                  _vm._v(" "),
-                  _c("input", {
-                    staticClass: "form-control",
-                    attrs: { type: "text", name: "destinatario" },
-                    on: { input: _vm.UpdateValue }
-                  }),
-                  _vm._v(" "),
-                  _c("label", { attrs: { for: "fechaAlta" } }, [
-                    _vm._v("Fecha:")
-                  ]),
-                  _vm._v(" "),
-                  _c("input", {
-                    staticClass: "form-control",
-                    attrs: { type: "date", name: "fechaAlta" },
-                    on: { input: _vm.UpdateValue }
-                  }),
-                  _vm._v(" "),
-                  _c("label", { attrs: { for: "fechaHasta" } }, [
-                    _vm._v("Fecha de Realizarce")
-                  ]),
-                  _vm._v(" "),
-                  _c("input", {
-                    staticClass: "form-control",
-                    attrs: { type: "date", name: "fechaHasta" },
-                    on: { input: _vm.UpdateValue }
-                  }),
-                  _vm._v(" "),
-                  _c("label", { attrs: { for: "are" } }, [_vm._v("Area")]),
+                  _c("h4", [_vm._v("Nuevo Expediente")]),
                   _vm._v(" "),
                   _c(
-                    "select",
-                    { attrs: { name: "selectarea", id: "selectarea" } },
+                    "div",
+                    { staticClass: "modal-body" },
                     [
+                      _c("label", { attrs: { for: "comitente" } }, [
+                        _vm._v("Asunto")
+                      ]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.newExpediente.asunto,
+                            expression: "newExpediente.asunto"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { type: "text", name: "asunto" },
+                        domProps: { value: _vm.newExpediente.asunto },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.newExpediente,
+                              "asunto",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("label", { attrs: { for: "destinatario" } }, [
+                        _vm._v("Comitente")
+                      ]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.newExpediente.comitente,
+                            expression: "newExpediente.comitente"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { type: "text", name: "comitente" },
+                        domProps: { value: _vm.newExpediente.comitente },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.newExpediente,
+                              "comitente",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("label", { attrs: { for: "asunto" } }, [
+                        _vm._v("Destinatario")
+                      ]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.newExpediente.destinatario,
+                            expression: "newExpediente.destinatario"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { type: "text", name: "destinatario" },
+                        domProps: { value: _vm.newExpediente.destinatario },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.newExpediente,
+                              "destinatario",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("label", { attrs: { for: "fechaAlta" } }, [
+                        _vm._v("Fecha:")
+                      ]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.newExpediente.fechaAlta,
+                            expression: "newExpediente.fechaAlta"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { type: "date", name: "fechaAlta" },
+                        domProps: { value: _vm.newExpediente.fechaAlta },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.newExpediente,
+                              "fechaAlta",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("label", { attrs: { for: "fechaHasta" } }, [
+                        _vm._v("Fecha de Realizarce")
+                      ]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.newExpediente.fechaHasta,
+                            expression: "newExpediente.fechaHasta"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { type: "date", name: "fechaHasta" },
+                        domProps: { value: _vm.newExpediente.fechaHasta },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.newExpediente,
+                              "fechaHasta",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("label", { attrs: { for: "selectarea" } }, [
+                        _vm._v("Area")
+                      ]),
+                      _vm._v(" "),
                       _c(
-                        "option",
-                        { attrs: { selected: "", disabled: "", value: "" } },
-                        [_vm._v("Choose your make")]
+                        "select",
+                        {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.newExpediente.area,
+                              expression: "newExpediente.area"
+                            }
+                          ],
+                          attrs: { name: "selectarea", id: "selectarea" },
+                          on: {
+                            change: function($event) {
+                              var $$selectedVal = Array.prototype.filter
+                                .call($event.target.options, function(o) {
+                                  return o.selected
+                                })
+                                .map(function(o) {
+                                  var val = "_value" in o ? o._value : o.value
+                                  return val
+                                })
+                              _vm.$set(
+                                _vm.newExpediente,
+                                "area",
+                                $event.target.multiple
+                                  ? $$selectedVal
+                                  : $$selectedVal[0]
+                              )
+                            }
+                          }
+                        },
+                        [
+                          _c(
+                            "option",
+                            {
+                              attrs: { selected: "", disabled: "", value: "" }
+                            },
+                            [_vm._v("Choose your make")]
+                          ),
+                          _vm._v(" "),
+                          _vm._l(_vm.areas, function(area) {
+                            return _c(
+                              "option",
+                              { domProps: { value: area.id } },
+                              [_vm._v(_vm._s(area.area))]
+                            )
+                          })
+                        ],
+                        2
                       ),
                       _vm._v(" "),
-                      _vm._l(_vm.areas, function(area) {
-                        return _c("option", { domProps: { value: area.id } }, [
-                          _vm._v(_vm._s(area.area))
+                      _c("label", { attrs: { for: "presupuesto" } }, [
+                        _vm._v("Presupuesto")
+                      ]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.newExpediente.presupuesto,
+                            expression: "newExpediente.presupuesto"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { type: "text", name: "presupuesto" },
+                        domProps: { value: _vm.newExpediente.presupuesto },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.newExpediente,
+                              "presupuesto",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("label", { attrs: { for: "lugar" } }, [
+                        _vm._v("Lugar")
+                      ]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.newExpediente.lugar,
+                            expression: "newExpediente.lugar"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { type: "text", name: "lugar" },
+                        domProps: { value: _vm.newExpediente.lugar },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.newExpediente,
+                              "lugar",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("label", { attrs: { for: "tags" } }, [_vm._v("Tags")]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.newExpediente.tags,
+                            expression: "newExpediente.tags"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { type: "text", name: "tags" },
+                        domProps: { value: _vm.newExpediente.tags },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.newExpediente,
+                              "tags",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("label", { attrs: { for: "commnet" } }, [
+                        _vm._v("Comentarios")
+                      ]),
+                      _vm._v(" "),
+                      _c("textarea", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.newExpediente.comentario,
+                            expression: "newExpediente.comentario"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { rows: "5", id: "comment" },
+                        domProps: { value: _vm.newExpediente.comentario },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.newExpediente,
+                              "comentario",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _vm._l(_vm.errors, function(error) {
+                        return _c("span", { staticClass: "text-danger" }, [
+                          _vm._v(_vm._s(error))
                         ])
                       })
                     ],
                     2
                   ),
                   _vm._v(" "),
-                  _vm._l(_vm.errors, function(error) {
-                    return _c("span", { staticClass: "text-danger" }, [
-                      _vm._v(_vm._s(error))
-                    ])
-                  })
-                ],
-                2
-              ),
-              _vm._v(" "),
-              _vm._m(5, false, false)
+                  _vm._m(5, false, false)
+                ])
+              ])
             ])
           ])
-        ])
-      ])
+        ]
+      )
     ])
   ])
 }
