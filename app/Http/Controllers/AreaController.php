@@ -14,7 +14,8 @@ class AreaController extends Controller
      */
     public function index()
     {
-        //
+        $areas = Area::get();
+        return $areas;
     }
 
     /**

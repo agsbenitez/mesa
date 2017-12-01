@@ -50,10 +50,47 @@
                 </tbody>
 
             </table>
+            <h2>Areas:{{areas}}</h2>
+
+
 
         </div>
-        <ventana id="form" v-model="expediente"> </ventana>
+        <!--<ventana id="form" v-model="expediente"> </ventana>-->
+
         <div class="col-sm-2">
+            <div class="modal fade" id="create">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+                            <h4>Nuevo Expediente</h4>
+                            <div class="modal-body">
+                                <label for="comitente">Comitente</label>
+                                <input type="text" name="comitente" class="form-control" v-on:input="UpdateValue" >
+                                <label for="destinatario">Destinatario</label>
+                                <input type="text" name="destinatario" class="form-control" v-on:input="UpdateValue"/>
+                                <label for="fechaAlta">Fecha:</label>
+                                <input type="date" name="fechaAlta" class="form-control" v-on:input="UpdateValue"/>
+                                <label for="fechaHasta">Fecha de Realizarce</label>
+                                <input type="date" name="fechaHasta" class="form-control" v-on:input="UpdateValue"/>
+                                <label for="are">Area</label>
+                                <select name='selectarea' id='selectarea' >
+                                    <option selected="" disabled="" value="">Choose your make</option>
+                                    <option v-for="area in areas" :value="area.id">{{area.area}}</option>
+                                </select>
+
+                                <span v-for="error in errors" class="text-danger">{{error}}</span>
+
+                            </div>
+                            <div class="modal-footer">
+                                <input type="submit" class="btn btn-primary" value="Guardar">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
 
 
         </div>
@@ -99,24 +136,25 @@
 </style>
 
 <script>
-    import ventana from './forms-fields/expnew';
+//    import ventana from './forms-fields/expnew';
     export default {
-        components:{
+        /*components:{
             ventana
 
-        },
+        },*/
          data(){
              return {
                  "expediente": [],
-                 "area": [],
+                 "areas": [],
                  "id":null,
                  "newExpediente": null,
-                 "erros": [],
+                 "errors": [],
                  }
          },
 
          created: function(){
              this.getExp();
+             this.getArea();
 
          },
 
@@ -140,16 +178,18 @@
                      });
 
                  },
-                 getArea: function(id){
-                     var url = '/area/' + id;
-                     console.log(url);
+                 getArea: function(){
+                     var url = '/area/';
                      axios.get(url).then(response=>{
-                         this.area = response.data.area;
+                         this.areas = response.data;
 
                      }).catch((error)=>{
                          console.log(error)
                      });
                  },
+                UpdateValue: function(){
+                  toastr.success('Datos Actualizados');
+                },
 
                 createExp: function () {
                      var url = '/expediente';

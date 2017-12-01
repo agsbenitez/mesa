@@ -11332,7 +11332,7 @@ module.exports = Cancel;
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(12);
-module.exports = __webpack_require__(60);
+module.exports = __webpack_require__(58);
 
 
 /***/ }),
@@ -11358,8 +11358,8 @@ window.Vue = __webpack_require__(38);
 
 Vue.component('example', __webpack_require__(41));
 Vue.component('dash', __webpack_require__(44));
-Vue.component('dashArea', __webpack_require__(54));
-Vue.component('dashestados', __webpack_require__(57));
+Vue.component('dashArea', __webpack_require__(52));
+Vue.component('dashestados', __webpack_require__(55));
 
 var app = new Vue({
   el: '#app'
@@ -43330,7 +43330,7 @@ var normalizeComponent = __webpack_require__(1)
 /* script */
 var __vue_script__ = __webpack_require__(50)
 /* template */
-var __vue_template__ = __webpack_require__(53)
+var __vue_template__ = __webpack_require__(51)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -43751,8 +43751,43 @@ module.exports = function listToStyles (parentId, list) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__forms_fields_expnew__ = __webpack_require__(51);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__forms_fields_expnew___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__forms_fields_expnew__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -43854,25 +43889,25 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
-
+//    import ventana from './forms-fields/expnew';
 /* harmony default export */ __webpack_exports__["default"] = ({
-    components: {
-        ventana: __WEBPACK_IMPORTED_MODULE_0__forms_fields_expnew___default.a
-
-    },
+    /*components:{
+        ventana
+     },*/
     data: function data() {
         return {
             "expediente": [],
-            "area": [],
+            "areas": [],
             "id": null,
             "newExpediente": null,
-            "erros": []
+            "errors": []
         };
     },
 
 
     created: function created() {
         this.getExp();
+        this.getArea();
     },
 
     mounted: function mounted() {
@@ -43892,16 +43927,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 console.log(error);
             });
         },
-        getArea: function getArea(id) {
+        getArea: function getArea() {
             var _this2 = this;
 
-            var url = '/area/' + id;
-            console.log(url);
+            var url = '/area/';
             axios.get(url).then(function (response) {
-                _this2.area = response.data.area;
+                _this2.areas = response.data;
             }).catch(function (error) {
                 console.log(error);
             });
+        },
+        UpdateValue: function UpdateValue() {
+            toastr.success('Datos Actualizados');
         },
 
         createExp: function createExp() {
@@ -43930,142 +43967,151 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* 51 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var disposed = false
-var normalizeComponent = __webpack_require__(1)
-/* script */
-var __vue_script__ = null
-/* template */
-var __vue_template__ = __webpack_require__(52)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources/assets/js/components/forms-fields/expnew.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-58c78294", Component.options)
-  } else {
-    hotAPI.reload("data-v-58c78294", Component.options)
-' + '  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 52 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports={render:function(){},staticRenderFns:[]}
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-58c78294", module.exports)
-  }
-}
-
-/***/ }),
-/* 53 */
-/***/ (function(module, exports, __webpack_require__) {
-
 var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { staticClass: "row" },
-    [
-      _vm._m(0, false, false),
+  return _c("div", { staticClass: "row" }, [
+    _vm._m(0, false, false),
+    _vm._v(" "),
+    _c("div", { staticClass: "col-sm-10" }, [
+      _c(
+        "a",
+        {
+          staticClass: "btn btn-primary pull-right",
+          attrs: { href: "#", "data-toggle": "modal", "data-target": "#create" }
+        },
+        [_vm._v("\n            Nuevo Expedidnte\n        ")]
+      ),
       _vm._v(" "),
-      _c("div", { staticClass: "col-sm-10" }, [
-        _c(
-          "a",
-          {
-            staticClass: "btn btn-primary pull-right",
-            attrs: {
-              href: "#",
-              "data-toggle": "modal",
-              "data-target": "#create"
-            }
-          },
-          [_vm._v("\n            Nuevo Expedidnte\n        ")]
-        ),
+      _c("table", { staticClass: "table table-fixed " }, [
+        _vm._m(1, false, false),
         _vm._v(" "),
-        _c("table", { staticClass: "table table-fixed " }, [
-          _vm._m(1, false, false),
-          _vm._v(" "),
-          _c(
-            "tbody",
-            _vm._l(_vm.expediente, function(exp) {
-              return _c("tr", [
-                _c(
-                  "td",
-                  { staticClass: "col-xs-3", attrs: { width: "10px" } },
-                  [_vm._v(_vm._s(exp.id))]
-                ),
-                _vm._v(" "),
-                _c(
-                  "td",
-                  { staticClass: "col-xs-3", attrs: { width: "50px" } },
-                  [_vm._v(_vm._s(exp.comitente))]
-                ),
-                _vm._v(" "),
-                _c(
-                  "td",
-                  { staticClass: "col-xs-3", attrs: { width: "50px" } },
-                  [_vm._v(_vm._s(exp.destinatario))]
-                ),
-                _vm._v(" "),
-                _c(
-                  "td",
-                  { staticClass: "col-xs-3", attrs: { width: "10px" } },
-                  [_vm._v(_vm._s(exp.fecha_alta))]
-                ),
-                _vm._v(" "),
-                _c(
-                  "td",
-                  { staticClass: "col-xs-3", attrs: { width: "10px" } },
-                  [_vm._v(_vm._s(exp.fullarea.area))]
-                ),
-                _vm._v(" "),
-                _vm._m(2, true, false),
-                _vm._v(" "),
-                _vm._m(3, true, false)
-              ])
-            })
-          )
-        ])
+        _c(
+          "tbody",
+          _vm._l(_vm.expediente, function(exp) {
+            return _c("tr", [
+              _c("td", { staticClass: "col-xs-3", attrs: { width: "10px" } }, [
+                _vm._v(_vm._s(exp.id))
+              ]),
+              _vm._v(" "),
+              _c("td", { staticClass: "col-xs-3", attrs: { width: "50px" } }, [
+                _vm._v(_vm._s(exp.comitente))
+              ]),
+              _vm._v(" "),
+              _c("td", { staticClass: "col-xs-3", attrs: { width: "50px" } }, [
+                _vm._v(_vm._s(exp.destinatario))
+              ]),
+              _vm._v(" "),
+              _c("td", { staticClass: "col-xs-3", attrs: { width: "10px" } }, [
+                _vm._v(_vm._s(exp.fecha_alta))
+              ]),
+              _vm._v(" "),
+              _c("td", { staticClass: "col-xs-3", attrs: { width: "10px" } }, [
+                _vm._v(_vm._s(exp.fullarea.area))
+              ]),
+              _vm._v(" "),
+              _vm._m(2, true, false),
+              _vm._v(" "),
+              _vm._m(3, true, false)
+            ])
+          })
+        )
       ]),
       _vm._v(" "),
-      _c("ventana"),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-sm-2" })
-    ],
-    1
-  )
+      _c("h2", [_vm._v("Areas:" + _vm._s(_vm.areas))])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "col-sm-2" }, [
+      _c("div", { staticClass: "modal fade", attrs: { id: "create" } }, [
+        _c("div", { staticClass: "modal-dialog" }, [
+          _c("div", { staticClass: "modal-content" }, [
+            _c("div", { staticClass: "modal-header" }, [
+              _vm._m(4, false, false),
+              _vm._v(" "),
+              _c("h4", [_vm._v("Nuevo Expediente")]),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "modal-body" },
+                [
+                  _c("label", { attrs: { for: "comitente" } }, [
+                    _vm._v("Comitente")
+                  ]),
+                  _vm._v(" "),
+                  _c("input", {
+                    staticClass: "form-control",
+                    attrs: { type: "text", name: "comitente" },
+                    on: { input: _vm.UpdateValue }
+                  }),
+                  _vm._v(" "),
+                  _c("label", { attrs: { for: "destinatario" } }, [
+                    _vm._v("Destinatario")
+                  ]),
+                  _vm._v(" "),
+                  _c("input", {
+                    staticClass: "form-control",
+                    attrs: { type: "text", name: "destinatario" },
+                    on: { input: _vm.UpdateValue }
+                  }),
+                  _vm._v(" "),
+                  _c("label", { attrs: { for: "fechaAlta" } }, [
+                    _vm._v("Fecha:")
+                  ]),
+                  _vm._v(" "),
+                  _c("input", {
+                    staticClass: "form-control",
+                    attrs: { type: "date", name: "fechaAlta" },
+                    on: { input: _vm.UpdateValue }
+                  }),
+                  _vm._v(" "),
+                  _c("label", { attrs: { for: "fechaHasta" } }, [
+                    _vm._v("Fecha de Realizarce")
+                  ]),
+                  _vm._v(" "),
+                  _c("input", {
+                    staticClass: "form-control",
+                    attrs: { type: "date", name: "fechaHasta" },
+                    on: { input: _vm.UpdateValue }
+                  }),
+                  _vm._v(" "),
+                  _c("label", { attrs: { for: "are" } }, [_vm._v("Area")]),
+                  _vm._v(" "),
+                  _c(
+                    "select",
+                    { attrs: { name: "selectarea", id: "selectarea" } },
+                    [
+                      _c(
+                        "option",
+                        { attrs: { selected: "", disabled: "", value: "" } },
+                        [_vm._v("Choose your make")]
+                      ),
+                      _vm._v(" "),
+                      _vm._l(_vm.areas, function(area) {
+                        return _c("option", { domProps: { value: area.id } }, [
+                          _vm._v(_vm._s(area.area))
+                        ])
+                      })
+                    ],
+                    2
+                  ),
+                  _vm._v(" "),
+                  _vm._l(_vm.errors, function(error) {
+                    return _c("span", { staticClass: "text-danger" }, [
+                      _vm._v(_vm._s(error))
+                    ])
+                  })
+                ],
+                2
+              ),
+              _vm._v(" "),
+              _vm._m(5, false, false)
+            ])
+          ])
+        ])
+      ])
+    ])
+  ])
 }
 var staticRenderFns = [
   function() {
@@ -44125,6 +44171,30 @@ var staticRenderFns = [
         _vm._v("Delete")
       ])
     ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "button",
+      {
+        staticClass: "close",
+        attrs: { type: "button", "data-dismiss": "modal" }
+      },
+      [_c("span", [_vm._v("×")])]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-footer" }, [
+      _c("input", {
+        staticClass: "btn btn-primary",
+        attrs: { type: "submit", value: "Guardar" }
+      })
+    ])
   }
 ]
 render._withStripped = true
@@ -44137,15 +44207,15 @@ if (false) {
 }
 
 /***/ }),
-/* 54 */
+/* 52 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(55)
+var __vue_script__ = __webpack_require__(53)
 /* template */
-var __vue_template__ = __webpack_require__(56)
+var __vue_template__ = __webpack_require__(54)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -44185,7 +44255,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 55 */
+/* 53 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -44297,7 +44367,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 56 */
+/* 54 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -44417,15 +44487,15 @@ if (false) {
 }
 
 /***/ }),
-/* 57 */
+/* 55 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(58)
+var __vue_script__ = __webpack_require__(56)
 /* template */
-var __vue_template__ = __webpack_require__(59)
+var __vue_template__ = __webpack_require__(57)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -44465,7 +44535,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 58 */
+/* 56 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -44570,7 +44640,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 59 */
+/* 57 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -44681,7 +44751,7 @@ if (false) {
 }
 
 /***/ }),
-/* 60 */
+/* 58 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
