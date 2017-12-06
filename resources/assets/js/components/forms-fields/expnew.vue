@@ -50,26 +50,10 @@
     <script>
 
         export default {
-            data(){
-                return{
-                    "newExpediente":{
-                        "asunto":"",
-                        "comitente":"",
-                        "destinatario":"",
-                        "fechaAlta":"",
-                        "fechaHasta":"",
-                        "area":"",
-                        "presupuesto":"",
-                        "lugar":"",
-                        "comentario":"",
-                        "tags":"",
-                    }
-                }
 
-            },
             methods:{
-                expediente: function (event) {
-                    this.$emit("expediente", event.target.newExpediente);
+                expediente: function (newExpediente) {
+                    this.$emit('expediente', this.newExpediente);
 
                 }
             }

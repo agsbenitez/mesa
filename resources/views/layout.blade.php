@@ -1,6 +1,4 @@
-<!--To put this html into an existing HTML document, you must copy the JavaScript and-->
-<!--paste it in a specific location within the destination HTML document. You must then copy-->
-<!--and paste the table in a different location.-->
+
 
 <html>
 

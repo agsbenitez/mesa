@@ -42,16 +42,14 @@
                         <td class="col-xs-3" width="10px">
                             <a href="#" class="btn btn-warning btn-sm">Edit</a>
                         </td>
-                        <td class="col-xs-3" width="10px">
-                            <a href="#" class="btn btn-danger btn-sm">Delete</a>
-                        </td>
+
                     </tr>
                 </tbody>
             </table>
         </div>
-        <ventana label="form" v-on:expediente="UpdateValue"></ventana>
+        <!--<ventana label="form" v-on:expediente="UpdateValue"/>-->
 
-        <!--<div class="row">
+        <div class="row">
 
             <div class="modal fade" id="create">
                 <form method="post" v-on:submit.prevent="UpdateValue">
@@ -98,7 +96,7 @@
                     </div>
                 </form>
             </div>
-        </div>-->
+        </div>
     </div>
 </template>
 <style>
@@ -141,12 +139,12 @@
 </style>
 
 <script>
-    import ventana from './forms-fields/expnew';
+   /* import ventana from './forms-fields/expnew';*/
     export default {
-        components:{
+        /*components:{
             ventana
 
-        },
+        },*/
          data(){
              return {
                  "expediente": [],

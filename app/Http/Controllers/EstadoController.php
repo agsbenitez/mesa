@@ -27,7 +27,8 @@ class EstadoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+
+    /** public function create()
     {
         //
     }
@@ -40,7 +41,26 @@ class EstadoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //dd($request->estado);
+        $msg='';
+        $this->validate($request,[
+            'estado'=> 'required'
+        ]);
+
+        $estado = $request->estado;
+
+        try{
+            $newEstado = new Estado();
+            $newEstado->estado = $estado;
+            $newEstado->save();
+            $msg="succes";
+        } catch (\Exception $e){
+            $msg=$e->getMessage();
+            return new JsonResponse($msg, 500);
+        }
+
+
+        return $msg;
     }
 
     /**

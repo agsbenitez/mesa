@@ -28,7 +28,7 @@ Route::get('/vue', function(){
 });
 Route::resource('expediente', 'ExpedienteController');
 Route::resource('area', 'AreaController');
-Route::resource('estado', 'EstadoController');
+Route::resource('estado', 'EstadoController', ['except' => 'show', 'create']);
 
 
 Route::get('datatables', 'DatatablesController@index');

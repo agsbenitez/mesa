@@ -4,7 +4,7 @@
             <h1 class="page-header">Estados</h1>
         </div>
         <div class="col-sm-10">
-            <a href="#" class="btn btn-primary pull-right" data-toggle="modal" data-target="#create">-->
+            <a href="#" class="btn btn-primary pull-right" data-toggle="modal" data-target="#create">
                 Nuevo Estado
             </a>
             <table class="table table-hover table-striped">
@@ -39,10 +39,34 @@
                 </tbody>
 
             </table>
-            <!--<InputWidget label="Titulo" v-on:inputValue="setTitle" />-->
+
 
         </div>
         <div class="col-sm-2">
+            <div class="row">
+
+                <div class="modal fade" id="create">
+                    <form method="post" v-on:submit.prevent="newEstado">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+                                </div>
+                                <div class="modal-body">
+                                    <h4>Nuevo Estado</h4>
+                                    <label for="estado">Estado</label>
+                                    <input type="text" name="estado" class="form-control" v-model="estadoNew" >
+                                    <span v-for="error in errors" class="test-dander">{{error}}</span>
+
+                                </div>
+                                <div class="modal-footer">
+                                    <input type="submit" class="btn btn-primary" value="Guardar">
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
 
         </div>
     </div>
@@ -54,7 +78,8 @@
          data(){
              return {
                  "estados": [],
-                 "errors": null
+                 "errors": [],
+                 "estadoNew": null
                  }
          },
 
@@ -74,29 +99,54 @@
          },
 
          methods: {
-                 getEstados: function () {
-                     var url = '/estado';
-                     axios.get(url).then(response => {
-                         this.estados = response.data;
+             getEstados: function () {
+                 var url = '/estado';
+                 axios.get(url).then(response => {
+                     this.estados = response.data;
+                 }).catch((error) => {
+                     console.log(error);
+                 });
 
-                     }).catch((error)=>{
-                         console.log(error);
-                     });
-
-                 },
-             deleteEstado: function(estado){
-                    var url = 'estado/' + estado.id;
-                    axios.delete(url).then(response => {
-                        this.getEstados();
-
-                    }).catch((error)=>{
-                        console.log(error)
-                        toastr.warning(error.response.status);
+             },
+             deleteEstado: function (estado) {
+                 var url = 'estado/' + estado.id;
+                 axios.delete(url).then(response => {
+                     this.getEstados();
+                 }).catch((error) => {
+                     console.log(error)
+                     toastr.warning(error.response.status);
+                 });
+             },
+             /*newEstado: function () {
+                 var url = 'estado';
+                 console.log(this.estadoNew);
+                 axios.post(url, {
+                     'estado': this.estadoNew
+                 }).then(response => {
+                     this.getEstados();
+                     this.errors = '';
+                     $('#create').modal('hide');
+                     toastr.success('Estado Grabado');
+                 }).catch((error) => {
+                     this.errors = error.response.data;
+                     toastr.warning(this.error);
+                     this.errors='';
+                 });
+             }*/
+             newEstado: function () {
+                 var url = 'estado';
+                 axios.post(url, {
+                     'estado': this.estadoNew
+                 }).then(function (response) {
+                     console.log(response);
+                 }).catch((error) => {
+                     this.errors = error.response.data;
+                     toastr.warning(this.error);
+                     this.errors = '';
                  });
              }
-
-
          }
+
 
      }
 </script>
