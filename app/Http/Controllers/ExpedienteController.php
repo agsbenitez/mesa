@@ -49,6 +49,8 @@ class ExpedienteController extends Controller
      */
     public function show($id)
     {
+        $exp = Expediente::find($id);
+        return $exp;
 
     }
 

@@ -2,7 +2,7 @@
     <div class="row">
 
         <div class="modal fade" id="create">
-            <form method="post" v-on:submit="expediente">
+            <form  >
                 <div class="modal-dialog modal-lg">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -21,13 +21,13 @@
                             <input type="date" name="fechaAlta" class="form-control" v-model="newExpediente.fechaAlta">
                             <label for='fechaHasta'>Fecha de Realizarce</label>
                             <input type="date" name='fechaHasta' class="form-control" v-model="newExpediente.fechaHasta">
-                            <!--<div id="area">-->
-                                <!--<label for="selectarea">Area</label>-->
-                                <!--<select name='selectarea' id='selectarea'  v-model="newExpediente.area">-->
-                                    <!--<option selected="" disabled="" value="">Choose your make</option>-->
-                                    <!--<option v-for="area in areas" :value="area.id">{{area.area}}</option>-->
-                                <!--</select>-->
-                            <!--</div>-->event.target.value
+                            <div id="area">
+                                <label for="selectarea">Area</label>
+                                <select name='selectarea' id='selectarea'  v-model="newExpediente.area">
+                                    <option selected="" disabled="" value="">Choose your make</option>
+                                    <option v-for="area in areas" :value="area.id">{{area.area}}</option>
+                                </select>
+                            </div>
                             <label for="presupuesto">Presupuesto</label>
                             <input type="text" name="presupuesto" class="form-control" v-model="newExpediente.presupuesto">
                             <label for="lugar">Lugar</label>
@@ -36,29 +36,38 @@
                             <input type="text" name="tags" class="form-control" v-model="newExpediente.tags">
                             <label for="commnet">Comentarios</label>
                             <textarea class="form-control" rows="5" id="comment" v-model="newExpediente.comentario"></textarea>
-                            <!--<input type="textarea" name="tags" class="form-control" />-->
-                            <!--<span v-for="error in errors" class="text-danger">{{error}}</span>-->
+                            
+                            <span v-for="error in errors" class="text-danger">{{error}}</span>
                         </div>
                         <div class="modal-footer">
-                            <input type="submit" class="btn btn-primary" value="Guardar">
+                            <button  v-on:click="expediente" class="btn btn-primary" value="Guardar">
+                                Guardar
+                            </button>
                         </div>
                     </div>
                 </div>
             </form>
         </div>
     </div>
-    <script>
 
-        export default {
-
-            methods:{
-                expediente: function (newExpediente) {
-                    this.$emit('expediente', this.newExpediente);
-
-                }
-            }
-        }
-    </script>
 
 
 </template>
+<script>
+
+    export default {
+
+        props: ['newExpediente', 'areas'],
+
+        methods:{
+            expediente: function (newExpediente) {
+                debugger
+
+                this.$emit('expediente', this.newExpediente);
+
+                return false
+
+            }
+        }
+    }
+</script>
