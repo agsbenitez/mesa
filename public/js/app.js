@@ -11332,7 +11332,7 @@ module.exports = Cancel;
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(12);
-module.exports = __webpack_require__(61);
+module.exports = __webpack_require__(64);
 
 
 /***/ }),
@@ -43751,8 +43751,8 @@ module.exports = function listToStyles (parentId, list) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__forms_fields_expnew__ = __webpack_require__(51);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__forms_fields_expnew___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__forms_fields_expnew__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__child_expnew__ = __webpack_require__(51);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__child_expnew___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__child_expnew__);
 //
 //
 //
@@ -43850,7 +43850,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     components: {
-        ventana: __WEBPACK_IMPORTED_MODULE_0__forms_fields_expnew___default.a
+        ventana: __WEBPACK_IMPORTED_MODULE_0__child_expnew___default.a
 
     },
 
@@ -43972,7 +43972,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/assets/js/components/forms-fields/expnew.vue"
+Component.options.__file = "resources/assets/js/components/child/expnew.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
 
 /* hot reload */
@@ -43982,9 +43982,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-58c78294", Component.options)
+    hotAPI.createRecord("data-v-50e6c54d", Component.options)
   } else {
-    hotAPI.reload("data-v-58c78294", Component.options)
+    hotAPI.reload("data-v-50e6c54d", Component.options)
 ' + '  }
   module.hot.dispose(function (data) {
     disposed = true
@@ -44063,7 +44063,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     methods: {
         expediente: function expediente(newExpediente) {
-            debugger;
 
             this.$emit('expediente', this.newExpediente);
 
@@ -44453,7 +44452,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-58c78294", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-50e6c54d", module.exports)
   }
 }
 
@@ -45347,7 +45346,7 @@ var normalizeComponent = __webpack_require__(1)
 /* script */
 var __vue_script__ = __webpack_require__(59)
 /* template */
-var __vue_template__ = __webpack_require__(60)
+var __vue_template__ = __webpack_require__(63)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -45392,6 +45391,9 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__child_estadoNew__ = __webpack_require__(60);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__child_estadoNew___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__child_estadoNew__);
+//
 //
 //
 //
@@ -45469,11 +45471,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+
+    components: {
+        estadoNew: __WEBPACK_IMPORTED_MODULE_0__child_estadoNew___default.a
+    },
     data: function data() {
         return {
             "estados": [],
             "errors": [],
-            "estadoNew": null
+            "estadoNew": ""
         };
     },
 
@@ -45506,6 +45512,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var url = 'estado/' + estado.id;
             axios.delete(url).then(function (response) {
                 _this2.getEstados();
+                toastr.success("Estaddo Eliminado Satisfactoriamente");
             }).catch(function (error) {
                 console.log(error);
                 toastr.warning(error.response.status);
@@ -45530,11 +45537,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         newEstado: function newEstado() {
             var _this3 = this;
 
+            alert("entro");
             var url = 'estado';
             axios.post(url, {
                 'estado': this.estadoNew
             }).then(function (response) {
-                console.log(response);
+                $("#create").modal("hide");
+                toastr.success("Nuevo estado Grabado");
             }).catch(function (error) {
                 _this3.errors = error.response.data;
                 toastr.warning(_this3.error);
@@ -45547,6 +45556,202 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /***/ }),
 /* 60 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(61)
+/* template */
+var __vue_template__ = __webpack_require__(62)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/child/estadoNew.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-08e614e0", Component.options)
+  } else {
+    hotAPI.reload("data-v-08e614e0", Component.options)
+' + '  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 61 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: ['estadoNew', 'errors'],
+
+    methods: {
+        estado: function estado() {
+            this.$emit('estado', this.estadoNew);
+        }
+    }
+});
+
+/***/ }),
+/* 62 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "row" }, [
+    _c("div", { staticClass: "modal fade", attrs: { id: "create" } }, [
+      _c("form", [
+        _c("div", { staticClass: "modal-dialog modal-lg" }, [
+          _c("div", { staticClass: "modal-content" }, [
+            _vm._m(0, false, false),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "modal-body" },
+              [
+                _c("h4", [_vm._v("Nuevo Estado")]),
+                _vm._v(" "),
+                _c("label", { attrs: { for: "estado" } }, [_vm._v("Estado")]),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.estadoNew,
+                      expression: "estadoNew"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: { type: "text", name: "estado" },
+                  domProps: { value: _vm.estadoNew },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.estadoNew = $event.target.value
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _vm._l(_vm.errors, function(error) {
+                  return _c("span", { staticClass: "test-dander" }, [
+                    _vm._v(_vm._s(error))
+                  ])
+                })
+              ],
+              2
+            ),
+            _vm._v(" "),
+            _c("div", { staticClass: "modal-footer" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-primary",
+                  attrs: { value: "Guardar" },
+                  on: { clikc: _vm.estado }
+                },
+                [
+                  _vm._v(
+                    "\n                            Guardar\n                        "
+                  )
+                ]
+              )
+            ])
+          ])
+        ])
+      ])
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: { type: "button", "data-dismiss": "modal" }
+        },
+        [_c("span", [_vm._v("×")])]
+      )
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-08e614e0", module.exports)
+  }
+}
+
+/***/ }),
+/* 63 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -45601,74 +45806,21 @@ var render = function() {
       ])
     ]),
     _vm._v(" "),
-    _c("div", { staticClass: "col-sm-2" }, [
-      _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "modal fade", attrs: { id: "create" } }, [
-          _c(
-            "form",
-            {
-              attrs: { method: "post" },
-              on: {
-                submit: function($event) {
-                  $event.preventDefault()
-                  _vm.newEstado($event)
-                }
-              }
-            },
-            [
-              _c("div", { staticClass: "modal-dialog modal-lg" }, [
-                _c("div", { staticClass: "modal-content" }, [
-                  _vm._m(3, false, false),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    { staticClass: "modal-body" },
-                    [
-                      _c("h4", [_vm._v("Nuevo Estado")]),
-                      _vm._v(" "),
-                      _c("label", { attrs: { for: "estado" } }, [
-                        _vm._v("Estado")
-                      ]),
-                      _vm._v(" "),
-                      _c("input", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.estadoNew,
-                            expression: "estadoNew"
-                          }
-                        ],
-                        staticClass: "form-control",
-                        attrs: { type: "text", name: "estado" },
-                        domProps: { value: _vm.estadoNew },
-                        on: {
-                          input: function($event) {
-                            if ($event.target.composing) {
-                              return
-                            }
-                            _vm.estadoNew = $event.target.value
-                          }
-                        }
-                      }),
-                      _vm._v(" "),
-                      _vm._l(_vm.errors, function(error) {
-                        return _c("span", { staticClass: "test-dander" }, [
-                          _vm._v(_vm._s(error))
-                        ])
-                      })
-                    ],
-                    2
-                  ),
-                  _vm._v(" "),
-                  _vm._m(4, false, false)
-                ])
-              ])
-            ]
-          )
-        ])
-      ])
-    ])
+    _c(
+      "div",
+      { staticClass: "col-sm-2" },
+      [
+        _c("estadoNew", {
+          attrs: {
+            label: "form",
+            estadoNew: _vm.estadoNew,
+            errors: _vm.errors
+          },
+          on: { estado: _vm.newEstado }
+        })
+      ],
+      1
+    )
   ])
 }
 var staticRenderFns = [
@@ -45712,32 +45864,6 @@ var staticRenderFns = [
         [_vm._v("Editar")]
       )
     ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-header" }, [
-      _c(
-        "button",
-        {
-          staticClass: "close",
-          attrs: { type: "button", "data-dismiss": "modal" }
-        },
-        [_c("span", [_vm._v("×")])]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-footer" }, [
-      _c("input", {
-        staticClass: "btn btn-primary",
-        attrs: { type: "submit", value: "Guardar" }
-      })
-    ])
   }
 ]
 render._withStripped = true
@@ -45750,7 +45876,7 @@ if (false) {
 }
 
 /***/ }),
-/* 61 */
+/* 64 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin

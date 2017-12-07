@@ -43,7 +43,8 @@
 
         </div>
         <div class="col-sm-2">
-            <div class="row">
+            <estadoNew label="form" v-on:estado="newEstado" v-bind:estadoNew.sync="estadoNew" v-bind:errors="errors"></estadoNew>
+            <!--<div class="row">
 
                 <div class="modal fade" id="create">
                     <form method="post" v-on:submit.prevent="newEstado">
@@ -66,20 +67,24 @@
                         </div>
                     </form>
                 </div>
-            </div>
+            </div>-->
 
         </div>
     </div>
 </template>
 
 <script>
-
+    import estadoNew from './child/estadoNew'
      export default {
+
+        components:{
+            estadoNew
+        },
          data(){
              return {
                  "estados": [],
                  "errors": [],
-                 "estadoNew": null
+                 "estadoNew": ""
                  }
          },
 
@@ -112,6 +117,7 @@
                  var url = 'estado/' + estado.id;
                  axios.delete(url).then(response => {
                      this.getEstados();
+                     toastr.success("Estaddo Eliminado Satisfactoriamente");
                  }).catch((error) => {
                      console.log(error)
                      toastr.warning(error.response.status);
@@ -134,11 +140,13 @@
                  });
              }*/
              newEstado: function () {
+                 alert("entro");
                  var url = 'estado';
                  axios.post(url, {
                      'estado': this.estadoNew
-                 }).then(function (response) {
-                     console.log(response);
+                 }).then(response => {
+                     $("#create").modal("hide");
+                     toastr.success("Nuevo estado Grabado");
                  }).catch((error) => {
                      this.errors = error.response.data;
                      toastr.warning(this.error);

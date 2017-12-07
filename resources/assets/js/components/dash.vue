@@ -49,7 +49,7 @@
         </div>
             <ventana label="form" v-on:expediente="UpdateValue" v-bind:newExpediente="newExpediente" v-bind:areas='areas'> </ventana>
 
-        </div>
+
     </div>
 </template>
 <style>
@@ -92,7 +92,7 @@
 </style>
 
 <script>
-   import ventana from './forms-fields/expnew';
+   import ventana from './child/expnew';
     export default {
         components:{
             ventana

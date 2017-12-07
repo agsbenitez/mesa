@@ -61,7 +61,7 @@
 
         methods:{
             expediente: function (newExpediente) {
-                debugger
+
 
                 this.$emit('expediente', this.newExpediente);
 
