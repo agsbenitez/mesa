@@ -60,5 +60,5 @@
 
 </body>
 <script src="{{asset('js/app.js')}}"></script>
-<script src="cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+{{--<script src="cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>--}}
 </html>

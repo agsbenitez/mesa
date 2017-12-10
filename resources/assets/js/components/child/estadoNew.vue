@@ -11,12 +11,12 @@
                         <div class="modal-body">
                             <h4>Nuevo Estado</h4>
                             <label for="estado">Estado</label>
-                            <input type="text" name="estado" class="form-control"  v-model="estadoNew">
+                            <input type="text" name="estado" class="form-control"  v-model="estadoNew.valor">
                             <span v-for="error in errors" class="test-dander">{{error}}</span>
 
                         </div>
                         <div class="modal-footer">
-                            <button v-on:clikc="estado" class="btn btn-primary" value="Guardar">
+                            <button v-on:click="estado" class="btn btn-primary" value="Guardar">
                                 Guardar
                             </button>
                             <!--<input type="submit" class="btn btn-primary" value="Guardar">-->
@@ -30,11 +30,19 @@
 
 <script>
     export default {
-        props:['estadoNew', 'errors'],
+        props:['estadoNew','errors'],
+
+
+        data(){
+            return {
+                "est": null
+            }
+            },
 
         methods:{
-            estado: function(){
+            estado: function(estadoNew){
                 this.$emit('estado', this.estadoNew);
+                return false;
             }
         }
     }

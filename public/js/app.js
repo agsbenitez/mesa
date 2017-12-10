@@ -44063,10 +44063,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     methods: {
         expediente: function expediente(newExpediente) {
-
+            alert(newExpediente);
             this.$emit('expediente', this.newExpediente);
-
-            return false;
         }
     }
 });
@@ -45445,29 +45443,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -45479,7 +45454,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         return {
             "estados": [],
             "errors": [],
-            "estadoNew": ""
+            "estadoNew": {
+                "valor": ""
+            }
         };
     },
 
@@ -45511,6 +45488,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             var url = 'estado/' + estado.id;
             axios.delete(url).then(function (response) {
+
                 _this2.getEstados();
                 toastr.success("Estaddo Eliminado Satisfactoriamente");
             }).catch(function (error) {
@@ -45518,32 +45496,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 toastr.warning(error.response.status);
             });
         },
-        /*newEstado: function () {
-            var url = 'estado';
-            console.log(this.estadoNew);
-            axios.post(url, {
-                'estado': this.estadoNew
-            }).then(response => {
-                this.getEstados();
-                this.errors = '';
-                $('#create').modal('hide');
-                toastr.success('Estado Grabado');
-            }).catch((error) => {
-                this.errors = error.response.data;
-                toastr.warning(this.error);
-                this.errors='';
-            });
-        }*/
         newEstado: function newEstado() {
             var _this3 = this;
 
-            alert("entro");
             var url = 'estado';
+            debugger;
             axios.post(url, {
-                'estado': this.estadoNew
+                'estado': this.estadoNew.valor
             }).then(function (response) {
+                toastr.success("Nuevo estado Grabado: " + _this3.estadoNew.valor);
                 $("#create").modal("hide");
-                toastr.success("Nuevo estado Grabado");
             }).catch(function (error) {
                 _this3.errors = error.response.data;
                 toastr.warning(_this3.error);
@@ -45642,9 +45604,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: ['estadoNew', 'errors'],
 
+    data: function data() {
+        return {
+            "est": null
+        };
+    },
+
+
     methods: {
-        estado: function estado() {
+        estado: function estado(estadoNew) {
             this.$emit('estado', this.estadoNew);
+            return false;
         }
     }
 });
@@ -45677,19 +45647,19 @@ var render = function() {
                     {
                       name: "model",
                       rawName: "v-model",
-                      value: _vm.estadoNew,
-                      expression: "estadoNew"
+                      value: _vm.estadoNew.valor,
+                      expression: "estadoNew.valor"
                     }
                   ],
                   staticClass: "form-control",
                   attrs: { type: "text", name: "estado" },
-                  domProps: { value: _vm.estadoNew },
+                  domProps: { value: _vm.estadoNew.valor },
                   on: {
                     input: function($event) {
                       if ($event.target.composing) {
                         return
                       }
-                      _vm.estadoNew = $event.target.value
+                      _vm.$set(_vm.estadoNew, "valor", $event.target.value)
                     }
                   }
                 }),
@@ -45709,7 +45679,7 @@ var render = function() {
                 {
                   staticClass: "btn btn-primary",
                   attrs: { value: "Guardar" },
-                  on: { clikc: _vm.estado }
+                  on: { click: _vm.estado }
                 },
                 [
                   _vm._v(

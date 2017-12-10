@@ -61,11 +61,8 @@
 
         methods:{
             expediente: function (newExpediente) {
-
-
+                alert(newExpediente);
                 this.$emit('expediente', this.newExpediente);
-
-                return false
 
             }
         }

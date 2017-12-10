@@ -29,7 +29,7 @@
                         <td>{{estado.estado}}</td>
 
                         <td>
-                            <a href="#" class="btn btn-warning btn-link btn-sm ">Editar</a>
+                            <a href="#" v-on:click="editEstado(estado.id)" class="btn btn-warning btn-link btn-sm ">Editar</a>
                         </td>
                         <td>
                             <a href="#" class="btn btn-danger btn-link btn-sm" v-on:click.prevent="deleteEstado(estado)">Borrar</a>
@@ -43,31 +43,8 @@
 
         </div>
         <div class="col-sm-2">
-            <estadoNew label="form" v-on:estado="newEstado" v-bind:estadoNew.sync="estadoNew" v-bind:errors="errors"></estadoNew>
-            <!--<div class="row">
+            <estadoNew label="form" v-on:estado="newEstado" :estadoNew="estadoNew" :errors="errors"></estadoNew>
 
-                <div class="modal fade" id="create">
-                    <form method="post" v-on:submit.prevent="newEstado">
-                        <div class="modal-dialog modal-lg">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
-                                </div>
-                                <div class="modal-body">
-                                    <h4>Nuevo Estado</h4>
-                                    <label for="estado">Estado</label>
-                                    <input type="text" name="estado" class="form-control" v-model="estadoNew" >
-                                    <span v-for="error in errors" class="test-dander">{{error}}</span>
-
-                                </div>
-                                <div class="modal-footer">
-                                    <input type="submit" class="btn btn-primary" value="Guardar">
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>-->
 
         </div>
     </div>
@@ -84,7 +61,9 @@
              return {
                  "estados": [],
                  "errors": [],
-                 "estadoNew": ""
+                 "estadoNew":{
+                     "valor":""
+                 }
                  }
          },
 
@@ -108,6 +87,7 @@
                  var url = '/estado';
                  axios.get(url).then(response => {
                      this.estados = response.data;
+
                  }).catch((error) => {
                      console.log(error);
                  });
@@ -116,6 +96,7 @@
              deleteEstado: function (estado) {
                  var url = 'estado/' + estado.id;
                  axios.delete(url).then(response => {
+
                      this.getEstados();
                      toastr.success("Estaddo Eliminado Satisfactoriamente");
                  }).catch((error) => {
@@ -123,35 +104,29 @@
                      toastr.warning(error.response.status);
                  });
              },
-             /*newEstado: function () {
-                 var url = 'estado';
-                 console.log(this.estadoNew);
-                 axios.post(url, {
-                     'estado': this.estadoNew
-                 }).then(response => {
-                     this.getEstados();
-                     this.errors = '';
-                     $('#create').modal('hide');
-                     toastr.success('Estado Grabado');
-                 }).catch((error) => {
-                     this.errors = error.response.data;
-                     toastr.warning(this.error);
-                     this.errors='';
-                 });
-             }*/
              newEstado: function () {
-                 alert("entro");
                  var url = 'estado';
+                 debugger;
                  axios.post(url, {
-                     'estado': this.estadoNew
+                     'estado': this.estadoNew.valor
                  }).then(response => {
+                     toastr.success("Nuevo estado Grabado: " + this.estadoNew.valor);
                      $("#create").modal("hide");
-                     toastr.success("Nuevo estado Grabado");
+
                  }).catch((error) => {
                      this.errors = error.response.data;
                      toastr.warning(this.error);
                      this.errors = '';
                  });
+             }
+
+             editEstado: function(id){
+                 var url ='estado/' + id;
+                 axios.get(url).then(response=>{
+                     this.estados = response.data;
+                 }).catch((error) => {
+                     this.error = eorror.response.data
+                 })
              }
          }
 
