@@ -29,7 +29,10 @@
                         <td>{{estado.estado}}</td>
 
                         <td>
-                            <a href="#" v-on:click="editEstado(estado.id)" class="btn btn-warning btn-link btn-sm ">Editar</a>
+                            <a href="#" v-on:click.prevent="editEstado(estado)"
+                               class="btn btn-warning btn-link btn-sm ">
+                                Editar
+                            </a>
                         </td>
                         <td>
                             <a href="#" class="btn btn-danger btn-link btn-sm" v-on:click.prevent="deleteEstado(estado)">Borrar</a>
@@ -44,6 +47,7 @@
         </div>
         <div class="col-sm-2">
             <estadoNew label="form" v-on:estado="newEstado" :estadoNew="estadoNew" :errors="errors"></estadoNew>
+            <editestado label="form" v-on:estadosave="saveEstado" :est="est" :errors="errors"></editestado>
 
 
         </div>
@@ -52,10 +56,12 @@
 
 <script>
     import estadoNew from './child/estadoNew'
+    import editestado from './child/editestado'
      export default {
 
         components:{
-            estadoNew
+            estadoNew,
+            editestado
         },
          data(){
              return {
@@ -63,7 +69,12 @@
                  "errors": [],
                  "estadoNew":{
                      "valor":""
-                 }
+                 },
+                 "est":{
+                     "id": "",
+                     "estado":""
+                 },
+                 "msg":"el mensaje"
                  }
          },
 
@@ -118,15 +129,25 @@
                      toastr.warning(this.error);
                      this.errors = '';
                  });
-             }
+             },
 
-             editEstado: function(id){
-                 var url ='estado/' + id;
+             editEstado: function(estado){
+                 this.est.id = estado.id;
+                 this.est.estado = estado.estado;
+                 console.log(this.est.estado);
+                 $('#editest').modal('show');
+
+
+                 /*var url ='estado/' + estado.id;
                  axios.get(url).then(response=>{
                      this.estados = response.data;
                  }).catch((error) => {
                      this.error = eorror.response.data
-                 })
+                 })*/
+             },
+
+             saveEstado: function(est){
+                 toastr.success("salvar Estado: " + this.est.id + " " + this.est.estado)
              }
          }
 

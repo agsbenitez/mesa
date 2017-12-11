@@ -11332,7 +11332,7 @@ module.exports = Cancel;
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(12);
-module.exports = __webpack_require__(64);
+module.exports = __webpack_require__(67);
 
 
 /***/ }),
@@ -45344,7 +45344,7 @@ var normalizeComponent = __webpack_require__(1)
 /* script */
 var __vue_script__ = __webpack_require__(59)
 /* template */
-var __vue_template__ = __webpack_require__(63)
+var __vue_template__ = __webpack_require__(66)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -45391,6 +45391,8 @@ module.exports = Component.exports
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__child_estadoNew__ = __webpack_require__(60);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__child_estadoNew___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__child_estadoNew__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__child_editestado__ = __webpack_require__(63);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__child_editestado___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__child_editestado__);
 //
 //
 //
@@ -45443,12 +45445,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 
     components: {
-        estadoNew: __WEBPACK_IMPORTED_MODULE_0__child_estadoNew___default.a
+        estadoNew: __WEBPACK_IMPORTED_MODULE_0__child_estadoNew___default.a,
+        editestado: __WEBPACK_IMPORTED_MODULE_1__child_editestado___default.a
     },
     data: function data() {
         return {
@@ -45456,7 +45464,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             "errors": [],
             "estadoNew": {
                 "valor": ""
-            }
+            },
+            "est": {
+                "id": "",
+                "estado": ""
+            },
+            "msg": "el mensaje"
         };
     },
 
@@ -45511,6 +45524,24 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 toastr.warning(_this3.error);
                 _this3.errors = '';
             });
+        },
+
+        editEstado: function editEstado(estado) {
+            this.est.id = estado.id;
+            this.est.estado = estado.estado;
+            console.log(this.est.estado);
+            $('#editest').modal('show');
+
+            /*var url ='estado/' + estado.id;
+            axios.get(url).then(response=>{
+                this.estados = response.data;
+            }).catch((error) => {
+                this.error = eorror.response.data
+            })*/
+        },
+
+        saveEstado: function saveEstado(est) {
+            toastr.success("salvar Estado: " + this.est.id + " " + this.est.estado);
         }
     }
 
@@ -45724,6 +45755,196 @@ if (false) {
 /* 63 */
 /***/ (function(module, exports, __webpack_require__) {
 
+var disposed = false
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(64)
+/* template */
+var __vue_template__ = __webpack_require__(65)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/child/editestado.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-da87314c", Component.options)
+  } else {
+    hotAPI.reload("data-v-da87314c", Component.options)
+' + '  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 64 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: ['est', 'errors'],
+
+    data: function data() {
+        return {
+            "esto": null
+        };
+    },
+
+
+    methods: {
+        estado: function estado() {
+            this.$emit('estadosave', this.estado);
+            console.log(this.estado);
+            return false;
+        }
+    }
+});
+
+/***/ }),
+/* 65 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "row" }, [
+    _c("div", { staticClass: "modal fade", attrs: { id: "editest" } }, [
+      _c("form", [
+        _vm._v("estado\n            "),
+        _c("div", { staticClass: "modal-dialog modal-lg" }, [
+          _c("div", { staticClass: "modal-content" }, [
+            _vm._m(0, false, false),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "modal-body" },
+              [
+                _c("h4", [_vm._v("Edit Estado")]),
+                _vm._v(" "),
+                _c("label", { attrs: { for: "estado" } }, [_vm._v("Estado")]),
+                _vm._v(" "),
+                _c("input", {
+                  staticClass: "form-control",
+                  attrs: { type: "text", name: "estado" },
+                  domProps: { value: _vm.est.estado }
+                }),
+                _vm._v(" "),
+                _vm._l(_vm.errors, function(error) {
+                  return _c("span", { staticClass: "test-dander" }, [
+                    _vm._v(_vm._s(error))
+                  ])
+                })
+              ],
+              2
+            ),
+            _vm._v(" "),
+            _c("div", { staticClass: "modal-footer" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-primary",
+                  attrs: { value: "Guardar" },
+                  on: { click: _vm.estado }
+                },
+                [
+                  _vm._v(
+                    "\n                            Guardar\n                        "
+                  )
+                ]
+              )
+            ])
+          ])
+        ])
+      ])
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: { type: "button", "data-dismiss": "modal" }
+        },
+        [_c("span", [_vm._v("×")])]
+      )
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-da87314c", module.exports)
+  }
+}
+
+/***/ }),
+/* 66 */
+/***/ (function(module, exports, __webpack_require__) {
+
 var render = function() {
   var _vm = this
   var _h = _vm.$createElement
@@ -45752,7 +45973,26 @@ var render = function() {
               _vm._v(" "),
               _c("td", [_vm._v(_vm._s(estado.estado))]),
               _vm._v(" "),
-              _vm._m(2, true, false),
+              _c("td", [
+                _c(
+                  "a",
+                  {
+                    staticClass: "btn btn-warning btn-link btn-sm ",
+                    attrs: { href: "#" },
+                    on: {
+                      click: function($event) {
+                        $event.preventDefault()
+                        _vm.editEstado(estado)
+                      }
+                    }
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Editar\n                        "
+                    )
+                  ]
+                )
+              ]),
               _vm._v(" "),
               _c("td", [
                 _c(
@@ -45787,6 +46027,11 @@ var render = function() {
             errors: _vm.errors
           },
           on: { estado: _vm.newEstado }
+        }),
+        _vm._v(" "),
+        _c("editestado", {
+          attrs: { label: "form", est: _vm.est, errors: _vm.errors },
+          on: { estadosave: _vm.saveEstado }
         })
       ],
       1
@@ -45819,21 +46064,6 @@ var staticRenderFns = [
         _c("th", { attrs: { width: "25px" } }, [_vm._v(" ")])
       ])
     ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("td", [
-      _c(
-        "a",
-        {
-          staticClass: "btn btn-warning btn-link btn-sm ",
-          attrs: { href: "#" }
-        },
-        [_vm._v("Editar")]
-      )
-    ])
   }
 ]
 render._withStripped = true
@@ -45846,7 +46076,7 @@ if (false) {
 }
 
 /***/ }),
-/* 64 */
+/* 67 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
