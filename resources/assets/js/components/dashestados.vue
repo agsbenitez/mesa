@@ -111,7 +111,6 @@
                      this.getEstados();
                      toastr.success("Estaddo Eliminado Satisfactoriamente");
                  }).catch((error) => {
-                     console.log(error)
                      toastr.warning(error.response.status);
                  });
              },
@@ -125,8 +124,9 @@
                      $("#create").modal("hide");
 
                  }).catch((error) => {
-                     this.errors = error.response.data;
-                     toastr.warning(this.error);
+                     this.errors = error.response.data.message;
+                     toastr.warning(error.response.data.message);
+                     console.log(this.errors)
                      this.errors = '';
                  });
              },
@@ -147,8 +147,8 @@
                      toastr.success("Estdo Editado");
                      $("#editest").modal("hide");
                  }).catch((error) => {
-                     this.errors = error.response.data;
-                     toastr.warning(this.error);
+                     this.errors = error.response.data.message;
+                     toastr.warning(error.response.data.message);
                      this.errors = '';
                  });
 

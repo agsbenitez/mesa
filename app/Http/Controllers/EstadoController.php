@@ -95,6 +95,11 @@ class EstadoController extends Controller
     public function update(Request $request, $id)
     {
         //aca tengo que poner el codigo para actualizar el estado
+
+        $this->validate($request,[
+            'estado'=> 'required'
+        ]);
+
         $estado = Estado::find($id);
 
         $estado->estado = $request->get('estado');

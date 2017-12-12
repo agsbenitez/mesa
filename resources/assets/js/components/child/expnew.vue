@@ -40,7 +40,7 @@
                             <span v-for="error in errors" class="text-danger">{{error}}</span>
                         </div>
                         <div class="modal-footer">
-                            <button  v-on:click="expediente" class="btn btn-primary" value="Guardar">
+                            <button  v-on:click.prevent="expediente" class="btn btn-primary" value="Guardar">
                                 Guardar
                             </button>
                         </div>

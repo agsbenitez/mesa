@@ -44413,7 +44413,12 @@ var render = function() {
                 {
                   staticClass: "btn btn-primary",
                   attrs: { value: "Guardar" },
-                  on: { click: _vm.expediente }
+                  on: {
+                    click: function($event) {
+                      $event.preventDefault()
+                      _vm.expediente($event)
+                    }
+                  }
                 },
                 [
                   _vm._v(
@@ -45505,7 +45510,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 _this2.getEstados();
                 toastr.success("Estaddo Eliminado Satisfactoriamente");
             }).catch(function (error) {
-                console.log(error);
                 toastr.warning(error.response.status);
             });
         },
@@ -45520,8 +45524,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 toastr.success("Nuevo estado Grabado: " + _this3.estadoNew.valor);
                 $("#create").modal("hide");
             }).catch(function (error) {
-                _this3.errors = error.response.data;
-                toastr.warning(_this3.error);
+                _this3.errors = error.response.data.message;
+                toastr.warning(error.response.data.message);
+                console.log(_this3.errors);
                 _this3.errors = '';
             });
         },
@@ -45543,8 +45548,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 toastr.success("Estdo Editado");
                 $("#editest").modal("hide");
             }).catch(function (error) {
-                _this4.errors = error.response.data;
-                toastr.warning(_this4.error);
+                _this4.errors = error.response.data.message;
+                toastr.warning(error.response.data.message);
                 _this4.errors = '';
             });
         }
@@ -45715,7 +45720,12 @@ var render = function() {
                 {
                   staticClass: "btn btn-primary",
                   attrs: { value: "Guardar" },
-                  on: { click: _vm.estado }
+                  on: {
+                    click: function($event) {
+                      $event.preventDefault()
+                      _vm.estado($event)
+                    }
+                  }
                 },
                 [
                   _vm._v(
@@ -45915,7 +45925,12 @@ var render = function() {
                 {
                   staticClass: "btn btn-primary",
                   attrs: { value: "Guardar" },
-                  on: { click: _vm.estado }
+                  on: {
+                    click: function($event) {
+                      $event.preventDefault()
+                      _vm.estado($event)
+                    }
+                  }
                 },
                 [
                   _vm._v(

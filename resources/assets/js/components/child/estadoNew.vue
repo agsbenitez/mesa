@@ -16,7 +16,7 @@
 
                         </div>
                         <div class="modal-footer">
-                            <button v-on:click="estado" class="btn btn-primary" value="Guardar">
+                            <button v-on:click.prevent="estado" class="btn btn-primary" value="Guardar">
                                 Guardar
                             </button>
                             <!--<input type="submit" class="btn btn-primary" value="Guardar">-->
