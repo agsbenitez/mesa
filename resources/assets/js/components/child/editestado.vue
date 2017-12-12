@@ -11,7 +11,7 @@
                         <div class="modal-body">
                             <h4>Edit Estado</h4>
                             <label for="estado">Estado</label>
-                            <input type="text" name="estado" class="form-control"  :value="est.estado">
+                            <input id="input" type="text" name="estado" class="form-control"  :value="est.estado" v-bind:esto="est">
                             <span v-for="error in errors" class="test-dander">{{error}}</span>
 
                         </div>
@@ -35,15 +35,21 @@
 
         data(){
             return {
-                "esto": null
+                "esto":{
+                    'id':null,
+                    'estado':null
+                },
             }
         },
 
         methods:{
-            estado: function(){
-                this.$emit('estadosave', this.estado);
-                console.log(this.estado);
-                return false;
+            estado: function(esto, est){
+
+                this.est.estado=$('#input').val();
+                this.est.id=this.est.id;
+
+                this.$emit('estadosave', this.est);
+
             }
         }
     }

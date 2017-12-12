@@ -45513,7 +45513,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var _this3 = this;
 
             var url = 'estado';
-            debugger;
+
             axios.post(url, {
                 'estado': this.estadoNew.valor
             }).then(function (response) {
@@ -45531,17 +45531,22 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.est.estado = estado.estado;
             console.log(this.est.estado);
             $('#editest').modal('show');
-
-            /*var url ='estado/' + estado.id;
-            axios.get(url).then(response=>{
-                this.estados = response.data;
-            }).catch((error) => {
-                this.error = eorror.response.data
-            })*/
         },
 
         saveEstado: function saveEstado(est) {
-            toastr.success("salvar Estado: " + this.est.id + " " + this.est.estado);
+            var _this4 = this;
+
+            var url = 'estado/' + this.est.id;
+            axios.put(url, {
+                'estado': this.est.estado
+            }).then(function (response) {
+                toastr.success("Estdo Editado");
+                $("#editest").modal("hide");
+            }).catch(function (error) {
+                _this4.errors = error.response.data;
+                toastr.warning(_this4.error);
+                _this4.errors = '';
+            });
         }
     }
 
@@ -45841,16 +45846,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     data: function data() {
         return {
-            "esto": null
+            "esto": {
+                'id': null,
+                'estado': null
+            }
         };
     },
 
 
     methods: {
-        estado: function estado() {
-            this.$emit('estadosave', this.estado);
-            console.log(this.estado);
-            return false;
+        estado: function estado(esto, est) {
+
+            this.est.estado = $('#input').val();
+            this.est.id = this.est.id;
+
+            this.$emit('estadosave', this.est);
         }
     }
 });
@@ -45881,7 +45891,12 @@ var render = function() {
                 _vm._v(" "),
                 _c("input", {
                   staticClass: "form-control",
-                  attrs: { type: "text", name: "estado" },
+                  attrs: {
+                    id: "input",
+                    type: "text",
+                    name: "estado",
+                    esto: _vm.est
+                  },
                   domProps: { value: _vm.est.estado }
                 }),
                 _vm._v(" "),

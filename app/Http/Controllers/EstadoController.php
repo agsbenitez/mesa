@@ -94,7 +94,21 @@ class EstadoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        //aca tengo que poner el codigo para actualizar el estado
+        $estado = Estado::find($id);
+
+        $estado->estado = $request->get('estado');
+
+        try{
+            $estado->save();
+            $msg = 'Estado Actualizado';
+        } catch (QueryException $e){
+            $msg=$e->getMessage();
+            return new JsonResponse($msg, 500);
+        }
+
+        return $msg;
+
     }
 
     /**

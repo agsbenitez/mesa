@@ -117,7 +117,7 @@
              },
              newEstado: function () {
                  var url = 'estado';
-                 debugger;
+
                  axios.post(url, {
                      'estado': this.estadoNew.valor
                  }).then(response => {
@@ -137,17 +137,21 @@
                  console.log(this.est.estado);
                  $('#editest').modal('show');
 
-
-                 /*var url ='estado/' + estado.id;
-                 axios.get(url).then(response=>{
-                     this.estados = response.data;
-                 }).catch((error) => {
-                     this.error = eorror.response.data
-                 })*/
              },
 
              saveEstado: function(est){
-                 toastr.success("salvar Estado: " + this.est.id + " " + this.est.estado)
+                 var url= 'estado/' + this.est.id;
+                 axios.put(url, {
+                     'estado': this.est.estado
+                 }).then(response => {
+                     toastr.success("Estdo Editado");
+                     $("#editest").modal("hide");
+                 }).catch((error) => {
+                     this.errors = error.response.data;
+                     toastr.warning(this.error);
+                     this.errors = '';
+                 });
+
              }
          }
 
