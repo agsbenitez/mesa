@@ -14,7 +14,13 @@ class ExpedienteController extends Controller
      */
     public function index()
     {
-        $Exp = Expediente::get();
+        //$Exp = Expediente::orderBy('id', 'desc')
+        //    ->paginate(4)
+        //    ->get();
+        //->ordeBy('fecha_alta', 'desc');
+        $Exp = Expediente::paginate(4)
+        ->orderBy('id', 'desc');
+
 
 
         return $Exp;

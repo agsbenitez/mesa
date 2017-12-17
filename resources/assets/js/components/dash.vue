@@ -1,51 +1,55 @@
 <template>
     <div  class="row">
-        <div class="col-xs-12">
-            <h1 class="page-header">Expedientes</h1>
+        <div class="row">
+            <div class="col-md-3">
+                <h3 class="page-header text-center">------Expedientes  ---</h3>
+            </div>
         </div>
-        <div class="col-sm-10">
-            <a href="#" class="btn btn-primary pull-right" data-toggle="modal" data-target="#create">
-                Nuevo Expedidnte
-            </a>
-            <table class="table table-fixed ">
-                <thead>
-                <tr>
-                    <th class="col-xs-1">
-                        id
-                    </th>
-                    <th class="col-xs-3" width="50px">
-                        comitente
-                    </th>
-                    <th class="col-xs-3" width="50px">
-                        Destinatario
-                    </th>
-                    <th class="col-xs-3">
-                        Fechad de alta
-                    </th>
-                    <th class="col-xs-3">
-                        Area
-                    </th>
-                    <th>&nbsp;</th>
-
-                </tr>
-                </thead>
-
-                <tbody>
-
-                    <tr v-for="exp in expediente">
-                        <td class="col-xs-3" width="10px">{{exp.id}}</td>
-                        <td class="col-xs-3" width="50px">{{exp.comitente}}</td>
-                        <td class="col-xs-3" width="50px">{{exp.destinatario}}</td>
-                        <td class="col-xs-3" width="10px">{{exp.fecha_alta}}</td>
-                        <td class="col-xs-3" width="10px">{{exp.fullarea.area}}</td>
-                        <!--<td width="50px">El Area</td>-->
-                        <td class="col-xs-3" width="10px">
-                            <button v-on:click="editExpt(exp.id)" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#create">Edit</button>
-                        </td>
+        <div class="row">
+            <div class="col-md-10">
+                <a href="#" class="btn btn-primary pull-right" data-toggle="modal" data-target="#create">
+                    Nuevo Expediente
+                </a>
+                <table class="table table-striped table-condesed table-hover table-fixed ">
+                    <thead>
+                    <tr>
+                        <th>
+                            id
+                        </th>
+                        <th class="col-xs-3" width="50px">
+                            comitente
+                        </th>
+                        <th class="col-xs-3" width="50px">
+                            Destinatario
+                        </th>
+                        <th class="col-xs-3">
+                            Fechad de alta
+                        </th>
+                        <th class="col-xs-3">
+                            Area
+                        </th>
+                        <th>&nbsp;</th>
 
                     </tr>
-                </tbody>
-            </table>
+                    </thead>
+
+                    <tbody>
+
+                        <tr v-for="exp in expediente">
+                            <td >{{exp.id}}</td>
+                            <td class="col-xs-3" width="50px">{{exp.comitente}}</td>
+                            <td class="col-xs-3" width="50px">{{exp.destinatario}}</td>
+                            <td class="col-xs-3" width="10px">{{exp.fecha_alta}}</td>
+                            <td class="col-xs-3" width="10px">{{exp.fullarea.area}}</td>
+                            <!--<td width="50px">El Area</td>-->
+                            <td class="col-xs-3" width="10px">
+                                <button v-on:click="editExpt(exp.id)" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#create">Edit</button>
+                            </td>
+
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
             <ventana label="form" v-on:expediente="UpdateValue" v-bind:newExpediente="newExpediente" v-bind:areas='areas'> </ventana>
 
@@ -55,7 +59,7 @@
 <style>
 
     body{
-        background-color: #bdc3c7;
+        background-color: whitesmoke;
     }
     .table-fixed {
         width: 100%;
