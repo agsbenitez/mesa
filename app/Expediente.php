@@ -22,5 +22,5 @@ class Expediente extends Model
 
     public function getFullareaAttribute(){
         return $this->are();
-}
+    }
 }

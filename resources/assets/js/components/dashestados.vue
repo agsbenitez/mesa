@@ -1,9 +1,11 @@
 <template>
     <div id="a" class="row">
-        <div class="col-xs-12">
-            <h1 class="page-header">Estados</h1>
+        <div class="row">
+            <div class="col-md-">
+                <h1 class="page-header">Estados</h1>
+            </div>
         </div>
-        <div class="col-sm-10">
+        <div id="div1" class="col-sm-6">
             <a href="#" class="btn btn-primary pull-right" data-toggle="modal" data-target="#create">
                 Nuevo Estado
             </a>
@@ -53,6 +55,52 @@
         </div>
     </div>
 </template>
+
+<style>
+
+    /*#div1{
+        overflow: scroll;
+        height: 400px;
+        width: 500px;
+    }
+
+    #div1 table{
+        width: 500px;
+        background-color: lightgray;
+    }
+
+    thead, tbody{
+        display: block;
+    }
+    tbody {
+        height: 40vh;
+        min-height: 200px;
+        overflow-Y: scroll;
+    }
+    tr {
+        display: block;
+        overflow: hidden;
+    }*/
+
+    tr {
+        width: 100%;
+        display: inline-table;
+        height:60px;
+        table-layout: fixed;
+
+    }
+
+    table{
+        height:300px;
+        display: -moz-groupbox;
+    }
+    tbody{
+        overflow-y: scroll;
+        height: 200px;
+        width: 100%;
+        position: absolute;
+    }
+</style>
 
 <script>
     import estadoNew from './child/estadoNew'
