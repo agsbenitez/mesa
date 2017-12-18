@@ -49,7 +49,17 @@
                         </tr>
                     </tbody>
                 </table>
+                <div>
+                    <ul class="pagination">
+                        <li><a href="#">&laquo;</a></li>
+
+                        <li v-for="page in pager.last_page"><a href="#">{{page}}</a></li>
+
+                        <li><a href="#">&laquo;</a></li>
+                    </ul>
+                </div>
             </div>
+
         </div>
             <ventana label="form" v-on:expediente="UpdateValue" v-bind:newExpediente="newExpediente" v-bind:areas='areas'> </ventana>
 
@@ -105,6 +115,7 @@
         
         data(){
              return {
+                 "pager":null,
                  "expediente": [],
                  "areas": [],
                  "id":null,
@@ -122,35 +133,44 @@
                     },
                  "errors": []
                  }
-         },
+        },
 
-         created: function(){
-             this.getExp();
-             this.getArea();
+        created: function(){
+            this.init();
+            this.getArea();
 
-         },
+        },
 
 
-         mounted()
+        mounted()
              {
                  console.log('Componente montado')
              },
          computed:{
-
          },
 
-         methods: {
-                 getExp: function () {
-                     var url = '/expediente';
+        methods: {
+            init: function(){
+                var page = 1;
+                if (typeof(this.page) !== 'undefinied'){
+                    page = this.page
+                }
+                this.getExp(page);
+
+                },
+
+            getExp: function (page) {
+                     var url = '/expediente?page=' + page;
                      axios.get(url).then(response=>{
-                         this.expediente = response.data;
+                         this.expediente = response.data.data;
+                         this.pager = response.data;
 
                      }).catch((error)=>{
                          console.log(error);
                      });
 
                  },
-                 getArea: function(){
+            getArea: function(){
                      var url = '/area/';
                      axios.get(url).then(response=>{
                          this.areas = response.data;
@@ -159,12 +179,14 @@
                          console.log(error)
                      });
                  },
-                UpdateValue: function(){
+
+            UpdateValue: function(){
                   console.log(this.newExpediente);
                     $('#create').modal('hide');
                 },
 
-                createExp: function () {
+
+            createExp: function () {
                      var url = '/expediente';
                      axios.post(url, {
                          expediente: this.newExpediente
@@ -181,7 +203,7 @@
                      
                 },
 
-                editExpt: function(id){
+            editExpt: function(id){
                         var url ='expediente/' + id;
                         axios.get(url).then(response=>{
                             this.newExpediente = response.data;

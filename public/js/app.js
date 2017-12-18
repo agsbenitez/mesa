@@ -43850,6 +43850,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -43860,6 +43868,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     data: function data() {
         return {
+            "pager": null,
             "expediente": [],
             "areas": [],
             "id": null,
@@ -43881,7 +43890,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
     created: function created() {
-        this.getExp();
+        this.init();
         this.getArea();
     },
 
@@ -43892,12 +43901,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     computed: {},
 
     methods: {
-        getExp: function getExp() {
+        init: function init() {
+            var page = 1;
+            if (typeof this.page !== 'undefinied') {
+                page = this.page;
+            }
+            this.getExp(page);
+        },
+
+        getExp: function getExp(page) {
             var _this = this;
 
-            var url = '/expediente';
+            var url = '/expediente?page=' + page;
             axios.get(url).then(function (response) {
-                _this.expediente = response.data;
+                _this.expediente = response.data.data;
+                _this.pager = response.data;
             }).catch(function (error) {
                 console.log(error);
             });
@@ -43912,6 +43930,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 console.log(error);
             });
         },
+
         UpdateValue: function UpdateValue() {
             console.log(this.newExpediente);
             $('#create').modal('hide');
@@ -44557,6 +44576,23 @@ var render = function() {
                 })
               )
             ]
+          ),
+          _vm._v(" "),
+          _c(
+            "ul",
+            { staticClass: "pagination" },
+            [
+              _vm._m(2, false, false),
+              _vm._v(" "),
+              _vm._l(_vm.pager.last_page, function(page) {
+                return _c("li", [
+                  _c("a", { attrs: { href: "#" } }, [_vm._v(_vm._s(page))])
+                ])
+              }),
+              _vm._v(" "),
+              _vm._m(3, false, false)
+            ],
+            2
           )
         ])
       ]),
@@ -44617,6 +44653,18 @@ var staticRenderFns = [
         _c("th", [_vm._v(" ")])
       ])
     ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", [_c("a", { attrs: { href: "#" } }, [_vm._v("«")])])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", [_c("a", { attrs: { href: "#" } }, [_vm._v("«")])])
   }
 ]
 render._withStripped = true
