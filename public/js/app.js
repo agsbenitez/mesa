@@ -43707,7 +43707,7 @@ exports = module.exports = __webpack_require__(11)(undefined);
 
 
 // module
-exports.push([module.i, "\nbody{\n    background-color: whitesmoke;\n}\n.table-fixed {\n    width: 100%;\n    background-color: #f3f3f3;\ntbody {\n            height: 200px;\n            overflow-y: auto;\n            width: 100%;\n}\nthead, tbody, tr, td, th {\n            display: block;\n}\ntbody {\ntd {\n                float: left;\n}\n}\nthead {\ntr {\nth {\n                    float: left;\n                    background-color: #f39c12;\n                    border-color: #e67e22;\n}\n}\n}\n}\n\n\n", ""]);
+exports.push([module.i, "\nbody{\n    background-color: whitesmoke;\n}\n#pagerul{\n    position: absolute;\n    left: 50%;\n}\n.table-fixed {\n    width: 100%;\n    background-color: #f3f3f3;\ntbody {\n            height: 200px;\n            overflow-y: auto;\n            width: 100%;\n}\nthead, tbody, tr, td, th {\n            display: block;\n}\ntbody {\ntd {\n                float: left;\n}\n}\nthead {\ntr {\nth {\n                    float: left;\n                    background-color: #f39c12;\n                    border-color: #e67e22;\n}\n}\n}\n}\n\n\n", ""]);
 
 // exports
 
@@ -43753,6 +43753,19 @@ module.exports = function listToStyles (parentId, list) {
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__child_expnew__ = __webpack_require__(51);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__child_expnew___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__child_expnew__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -44492,12 +44505,11 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "row" },
     [
       _vm._m(0, false, false),
       _vm._v(" "),
       _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col-md-10" }, [
+        _c("div", { staticClass: "col-lg-12" }, [
           _c(
             "a",
             {
@@ -44578,22 +44590,37 @@ var render = function() {
             ]
           ),
           _vm._v(" "),
-          _c(
-            "ul",
-            { staticClass: "pagination" },
-            [
-              _vm._m(2, false, false),
-              _vm._v(" "),
-              _vm._l(_vm.pager.last_page, function(page) {
-                return _c("li", [
-                  _c("a", { attrs: { href: "#" } }, [_vm._v(_vm._s(page))])
-                ])
-              }),
-              _vm._v(" "),
-              _vm._m(3, false, false)
-            ],
-            2
-          )
+          _c("div", { staticClass: "row" }, [
+            _c(
+              "div",
+              {
+                staticClass: "col-lg-12",
+                attrs: { id: "pager", margin: "auto" }
+              },
+              [
+                _c(
+                  "ul",
+                  { staticClass: "pagination", attrs: { id: "pagerul" } },
+                  [
+                    _vm._m(2, false, false),
+                    _vm._v(" "),
+                    _vm._l(_vm.pager.last_page, function(page) {
+                      return _c("li", [
+                        _c("a", { attrs: { href: "#" } }, [
+                          _vm._v(_vm._s(page))
+                        ])
+                      ])
+                    }),
+                    _vm._v(" "),
+                    _vm._m(3, false, false)
+                  ],
+                  2
+                )
+              ]
+            )
+          ]),
+          _vm._v(" "),
+          _vm._m(4, false, false)
         ])
       ]),
       _vm._v(" "),
@@ -44615,9 +44642,9 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-md-3" }, [
+      _c("div", { staticClass: "col-md-10" }, [
         _c("h3", { staticClass: "page-header text-center" }, [
-          _vm._v("------Expedientes  ---")
+          _vm._v("Expedientes")
         ])
       ])
     ])
@@ -44665,6 +44692,24 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("li", [_c("a", { attrs: { href: "#" } }, [_vm._v("«")])])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "details", attrs: { id: "files" } }, [
+        _vm._v("2")
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-lg-4", attrs: { border: "solid" } }, [
+        _vm._v("1")
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-lg-4", attrs: { border: "solid" } }, [
+        _vm._v("3")
+      ])
+    ])
   }
 ]
 render._withStripped = true

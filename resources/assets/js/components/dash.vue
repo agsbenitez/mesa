@@ -1,12 +1,12 @@
 <template>
-    <div  class="row">
+    <div>
         <div class="row">
-            <div class="col-md-3">
-                <h3 class="page-header text-center">------Expedientes  ---</h3>
+            <div class="col-md-10">
+                <h3 class="page-header text-center">Expedientes</h3>
             </div>
         </div>
         <div class="row">
-            <div class="col-md-10">
+            <div class="col-lg-12">
                 <a href="#" class="btn btn-primary pull-right" data-toggle="modal" data-target="#create">
                     Nuevo Expediente
                 </a>
@@ -49,21 +49,26 @@
                         </tr>
                     </tbody>
                 </table>
-                <div>
-                    <ul class="pagination">
-                        <li><a href="#">&laquo;</a></li>
+                <div class="row">
+                    <div id="pager" class="col-lg-12" margin="auto">
+                        <ul id="pagerul" class="pagination">
+                            <li><a href="#">&laquo;</a></li>
 
-                        <li v-for="page in pager.last_page"><a href="#">{{page}}</a></li>
+                            <li v-for="page in pager.last_page"><a href="#">{{page}}</a></li>
 
-                        <li><a href="#">&laquo;</a></li>
-                    </ul>
+                            <li><a href="#">&laquo;</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="row">
+                    <div id="files" class="details">2</div>
+                    <div class="col-lg-4" border="solid">1</div>
+                    <div class="col-lg-4" border="solid">3</div>
                 </div>
             </div>
 
         </div>
             <ventana label="form" v-on:expediente="UpdateValue" v-bind:newExpediente="newExpediente" v-bind:areas='areas'> </ventana>
-
-
     </div>
 </template>
 <style>
@@ -71,6 +76,12 @@
     body{
         background-color: whitesmoke;
     }
+
+    #pagerul{
+        position: absolute;
+        left: 50%;
+    }
+
     .table-fixed {
         width: 100%;
         background-color: #f3f3f3;
