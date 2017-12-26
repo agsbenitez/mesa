@@ -52,11 +52,11 @@
                 <div class="row">
                     <div id="pager" class="col-lg-12" margin="auto">
                         <ul id="pagerul" class="pagination">
-                            <li><a href="#">&laquo;</a></li>
+                            <li><a href="#" v-on:click="init()">&laquo;</a></li>
 
-                            <li v-for="page in pager.last_page"><a href="#">{{page}}</a></li>
+                            <li v-for="page in pager.last_page" v-on:click="getExp(page)"><a href="#">{{page}}</a></li>
 
-                            <li><a href="#">&laquo;</a></li>
+                            <li><a href="#" v-on:click="getExp(pager.last_page)">&raquo;</a></li>
                         </ul>
                     </div>
                 </div>

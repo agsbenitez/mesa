@@ -44099,7 +44099,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     methods: {
         expediente: function expediente(newExpediente) {
-            alert(newExpediente);
             this.$emit('expediente', this.newExpediente);
         }
     }
@@ -44602,17 +44601,53 @@ var render = function() {
                   "ul",
                   { staticClass: "pagination", attrs: { id: "pagerul" } },
                   [
-                    _vm._m(2, false, false),
+                    _c("li", [
+                      _c(
+                        "a",
+                        {
+                          attrs: { href: "#" },
+                          on: {
+                            click: function($event) {
+                              _vm.init()
+                            }
+                          }
+                        },
+                        [_vm._v("«")]
+                      )
+                    ]),
                     _vm._v(" "),
                     _vm._l(_vm.pager.last_page, function(page) {
-                      return _c("li", [
-                        _c("a", { attrs: { href: "#" } }, [
-                          _vm._v(_vm._s(page))
-                        ])
-                      ])
+                      return _c(
+                        "li",
+                        {
+                          on: {
+                            click: function($event) {
+                              _vm.getExp(page)
+                            }
+                          }
+                        },
+                        [
+                          _c("a", { attrs: { href: "#" } }, [
+                            _vm._v(_vm._s(page))
+                          ])
+                        ]
+                      )
                     }),
                     _vm._v(" "),
-                    _vm._m(3, false, false)
+                    _c("li", [
+                      _c(
+                        "a",
+                        {
+                          attrs: { href: "#" },
+                          on: {
+                            click: function($event) {
+                              _vm.getExp(_vm.pager.last_page)
+                            }
+                          }
+                        },
+                        [_vm._v("»")]
+                      )
+                    ])
                   ],
                   2
                 )
@@ -44620,7 +44655,7 @@ var render = function() {
             )
           ]),
           _vm._v(" "),
-          _vm._m(4, false, false)
+          _vm._m(2, false, false)
         ])
       ]),
       _vm._v(" "),
@@ -44680,18 +44715,6 @@ var staticRenderFns = [
         _c("th", [_vm._v(" ")])
       ])
     ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", [_c("a", { attrs: { href: "#" } }, [_vm._v("«")])])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", [_c("a", { attrs: { href: "#" } }, [_vm._v("«")])])
   },
   function() {
     var _vm = this
