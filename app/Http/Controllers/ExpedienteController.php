@@ -41,7 +41,36 @@ class ExpedienteController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //dd($request->estado);
+        $msg='';
+        $this->validate($request,[
+            'estado'=> 'required',
+            'asunto'=> 'required',
+            'comitente'=> 'required',
+            'destinatario' => 'required',
+            'fechaAlta' => 'required',
+            'fechaHasta' => 'required',
+            'area' => 'required',
+            'presupuesto' => 'required',
+            'lugar'=> 'required',
+            'comentario'=> 'required',
+            'tags'=> 'required',
+        ]);
+
+        $exp = $request->estado;
+
+        try{
+            $newEstado = new Estado();
+            $newEstado->estado = $estado;
+            $newEstado->save();
+            $msg="succes";
+        } catch (\Exception $e){
+            $msg=$e->getMessage();
+            return new JsonResponse($msg, 500);
+        }
+
+
+        return $msg;
     }
 
     /**

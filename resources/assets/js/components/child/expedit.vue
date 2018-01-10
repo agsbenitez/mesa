@@ -1,7 +1,7 @@
 <template>
     <div class="row">
 
-        <div class="modal fade" id="create">
+        <div class="modal fade" id="editexp">
             <form  >
                 <div class="modal-dialog modal-lg">
                     <div class="modal-content">
@@ -36,7 +36,7 @@
                             <input type="text" name="tags" class="form-control" v-model="newExpediente.tags">
                             <label for="commnet">Comentarios</label>
                             <textarea class="form-control" rows="5" id="comment" v-model="newExpediente.comentario"></textarea>
-
+                            
                             <span v-for="error in errors" class="text-danger">{{error}}</span>
                         </div>
                         <div class="modal-footer">
@@ -57,11 +57,11 @@
 
     export default {
 
-        props: ['newExpediente', 'areas', 'errors'],
+        props: ['newExpediente', 'areas'],
 
         methods:{
             expediente: function (newExpediente) {
-                this.$emit('expe', this.newExpediente);
+                this.$emit('expediente', this.newExpediente);
 
             }
         }

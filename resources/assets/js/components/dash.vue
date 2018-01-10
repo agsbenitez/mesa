@@ -43,7 +43,7 @@
                             <td class="col-xs-3" width="10px">{{exp.fullarea.area}}</td>
                             <!--<td width="50px">El Area</td>-->
                             <td class="col-xs-3" width="10px">
-                                <button v-on:click="editExpt(exp.id)" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#create">Edit</button>
+                                <button v-on:click="editExpt(exp.id)" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#editexp">Edit</button>
                             </td>
 
                         </tr>
@@ -68,7 +68,12 @@
             </div>
 
         </div>
-            <ventana label="form" v-on:expediente="UpdateValue" v-bind:newExpediente="newExpediente" v-bind:areas='areas'> </ventana>
+        <div>
+            <expNew label="form" v-on:expe="createExp" :newExpediente="newExpediente" :areas='areas' :errors="errors">
+
+            </expNew>
+            <ventana label="form" v-on:expediente="UpdateValue" :newExpediente="newExpediente" :areas='areas'> </ventana>
+        </div>
     </div>
 </template>
 <style>
@@ -117,10 +122,12 @@
 </style>
 
 <script>
-   import ventana from './child/expnew';
-    export default {
+   import ventana from './child/expedit'
+   import expNew from './child/expnew'
+   export default {
         components:{
-            ventana
+            ventana,
+            expNew
 
         },
         
