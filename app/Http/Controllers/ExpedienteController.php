@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Expediente;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class ExpedienteController extends Controller
@@ -41,11 +43,14 @@ class ExpedienteController extends Controller
      */
     public function store(Request $request)
     {
-        //dd($request->estado);
+        //dd($request->newExpediente);
         $msg='';
-        $this->validate($request,[
-            'estado'=> 'required',
-            'asunto'=> 'required',
+        $json = $request->json()->all();
+        dd($json['expediente'],['asunto']);
+
+
+        $validator = Validator::make($json['expediente'],[
+            'asunto' => 'required',
             'comitente'=> 'required',
             'destinatario' => 'required',
             'fechaAlta' => 'required',
@@ -57,12 +62,44 @@ class ExpedienteController extends Controller
             'tags'=> 'required',
         ]);
 
-        $exp = $request->estado;
+        if ($validator->fails()){
+            return new JsonResponse($validator->errors()->all(), 400);
+        }
+
+        /*$this->validate($json,[
+            'asunto' => 'required',
+            'comitente'=> 'required',
+            'destinatario' => 'required',
+            'fechaAlta' => 'required',
+            'fechaHasta' => 'required',
+            'area' => 'required',
+            'presupuesto' => 'required',
+            'lugar'=> 'required',
+            'comentario'=> 'required',
+            'tags'=> 'required',
+        ]);*/
+
+        $asunto = $request->newExpediente->asunto;
+        $comit = $request->newExpediente->comitente;
+        $destinatario = $request->newExpediente->destinatario;
+        $fechaA = $request->newExpediente->fechaAlta;
+        $fechaH = $request->newExpediente->fechaHasta;
+        $area = $request->newExpediente->area;
+        $presupuesto = $request->newExpediente->presupuesto;
+        $lugar = $request->newExpediente->lugar;
+        $tags = $request->newExpediente->tags;
 
         try{
-            $newEstado = new Estado();
-            $newEstado->estado = $estado;
-            $newEstado->save();
+            $newExp = new Expediente();
+            $newExp->comitente = $comit;
+            $newExp->destinatario = $destinatario;
+            $newExp->fecha_alta = $fechaA;
+            $newExp->fecha_resolucion=$fechaH;
+            $newExp->area=$area;
+            $newExp->asunto=$asunto;
+            $newExp->presupuesto=$presupuesto;
+            $newExp->lugar=$lugar;
+            $newExp->save();
             $msg="succes";
         } catch (\Exception $e){
             $msg=$e->getMessage();

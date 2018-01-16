@@ -43962,8 +43962,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var _this3 = this;
 
             var url = '/expediente';
+            console.log(this.newExpediente.asunto);
             axios.post(url, {
-                expediente: this.newExpediente
+                'expediente': this.newExpediente
             }).then(function (response) {
                 //                        this.getExp();
                 _this3.newExpediente = '';

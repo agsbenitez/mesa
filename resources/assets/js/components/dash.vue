@@ -206,8 +206,9 @@
 
             createExp: function () {
                      var url = '/expediente';
+                     console.log(this.newExpediente.asunto);
                      axios.post(url, {
-                         expediente: this.newExpediente
+                         'expediente': this.newExpediente
                      }).then(response => {
     //                        this.getExp();
                          this.newExpediente = '';
