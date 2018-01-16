@@ -69,10 +69,10 @@
 
         </div>
         <div>
-            <expNew label="form" v-on:expe="createExp" :newExpediente="newExpediente" :areas='areas' :errors="errors">
+            <expNew label="form" v-on:expe="createExp" :newExpediente="newExpediente" :areas='areas' :estados='estados' >
 
             </expNew>
-            <ventana label="form" v-on:expediente="UpdateValue" :newExpediente="newExpediente" :areas='areas'> </ventana>
+            <ventana label="form" v-on:expediente="UpdateValue" :newExpediente="newExpediente" :areas='areas' :estados='estados'> </ventana>
         </div>
     </div>
 </template>
@@ -133,9 +133,10 @@
         
         data(){
              return {
-                 "pager":null,
+                 "pager":'',
                  "expediente": [],
                  "areas": [],
+                 "estados": [],
                  "id":null,
                  "newExpediente":{
                      "asunto":"",
@@ -144,6 +145,7 @@
                      "fechaAlta":"",
                      "fechaHasta":"",
                      "area":"",
+                     "estado":"",
                      "presupuesto":"",
                      "lugar":"",
                      "comentario":"",
@@ -156,6 +158,7 @@
         created: function(){
             this.init();
             this.getArea();
+            this.getEstado();
 
         },
 
@@ -198,6 +201,16 @@
                      });
                  },
 
+            getEstado: function(){
+                var url = '/estado';
+                axios.get(url).then(response=>{
+                    this.estados = response.data;
+
+                }).catch((error)=>{
+                    console.log(error)
+                });
+            },
+
             UpdateValue: function(){
                   console.log(this.newExpediente);
                     $('#create').modal('hide');
@@ -216,8 +229,9 @@
                          $('#create').modal('hide');
                          toastr.success('Expediente Cargado')
                      }).catch((error) => {
-                         this.error = error.response.data
-                         console.log(error);
+                         this.error = error.response.data.message;
+                         toastr.warning(error.response.data);
+                         this.errors = '';
                      });
                      
                 },

@@ -14,7 +14,9 @@ class AlterExp extends Migration
     public function up()
     {
         Schema::table('expedientes', function (Blueprint $table){
-            $table->renameColumn('facha_caducidad', 'fecha_caducidad');
+            //$table->renameColumn('facha_caducidad', 'fecha_caducidad');
+            $table->dateTime('fecha_caducidad')->nullable()->change();
+
 
         });
     }

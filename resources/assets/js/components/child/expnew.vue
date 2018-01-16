@@ -28,6 +28,13 @@
                                     <option v-for="area in areas" :value="area.id">{{area.area}}</option>
                                 </select>
                             </div>
+                            <div id="estado">
+                                <label for="selectestado">Estado</label>
+                                <select name='selecestado' id='selectestado'  v-model="newExpediente.estado">
+                                    <option selected="" disabled="" value="">Choose your make</option>
+                                    <option v-for="estado in estados" :value="estado.id">{{estado.estado}}</option>
+                                </select>
+                            </div>
                             <label for="presupuesto">Presupuesto</label>
                             <input type="text" name="presupuesto" class="form-control" v-model="newExpediente.presupuesto">
                             <label for="lugar">Lugar</label>
@@ -57,7 +64,7 @@
 
     export default {
 
-        props: ['newExpediente', 'areas', 'errors'],
+        props: ['newExpediente', 'areas', 'estados', 'errors'],
 
         methods:{
             expediente: function (newExpediente) {

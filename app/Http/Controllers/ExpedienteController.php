@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Expediente;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -46,7 +47,6 @@ class ExpedienteController extends Controller
         //dd($request->newExpediente);
         $msg='';
         $json = $request->json()->all();
-        dd($json['expediente'],['asunto']);
 
 
         $validator = Validator::make($json['expediente'],[
@@ -58,36 +58,26 @@ class ExpedienteController extends Controller
             'area' => 'required',
             'presupuesto' => 'required',
             'lugar'=> 'required',
-            'comentario'=> 'required',
-            'tags'=> 'required',
+
         ]);
 
         if ($validator->fails()){
+            //$msg=$e->getMessage();
             return new JsonResponse($validator->errors()->all(), 400);
+            //return new JsonResponse($msg, 400);
         }
 
-        /*$this->validate($json,[
-            'asunto' => 'required',
-            'comitente'=> 'required',
-            'destinatario' => 'required',
-            'fechaAlta' => 'required',
-            'fechaHasta' => 'required',
-            'area' => 'required',
-            'presupuesto' => 'required',
-            'lugar'=> 'required',
-            'comentario'=> 'required',
-            'tags'=> 'required',
-        ]);*/
 
-        $asunto = $request->newExpediente->asunto;
-        $comit = $request->newExpediente->comitente;
-        $destinatario = $request->newExpediente->destinatario;
-        $fechaA = $request->newExpediente->fechaAlta;
-        $fechaH = $request->newExpediente->fechaHasta;
-        $area = $request->newExpediente->area;
-        $presupuesto = $request->newExpediente->presupuesto;
-        $lugar = $request->newExpediente->lugar;
-        $tags = $request->newExpediente->tags;
+        $asunto = $json['expediente']['asunto'];
+        $comit = $json['expediente']['comitente'];
+        $destinatario = $json['expediente']['destinatario'];
+        $fechaA = $json['expediente']['fechaAlta'];
+        $fechaH = $json['expediente']['fechaHasta'];
+        $area = $json['expediente']['area'];
+        $estado = $json['expediente']['estado'];
+        $presupuesto = $json['expediente']['presupuesto'];
+        $lugar = $json['expediente']['lugar'];
+        $tags = $json['expediente']['tags'];
 
         try{
             $newExp = new Expediente();
@@ -96,12 +86,13 @@ class ExpedienteController extends Controller
             $newExp->fecha_alta = $fechaA;
             $newExp->fecha_resolucion=$fechaH;
             $newExp->area=$area;
+            $newExp->estado=$estado;
             $newExp->asunto=$asunto;
             $newExp->presupuesto=$presupuesto;
             $newExp->lugar=$lugar;
             $newExp->save();
             $msg="succes";
-        } catch (\Exception $e){
+        } catch (QueryException $e){
             $msg=$e->getMessage();
             return new JsonResponse($msg, 500);
         }

@@ -43890,9 +43890,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     data: function data() {
         return {
-            "pager": null,
+            "pager": '',
             "expediente": [],
             "areas": [],
+            "estados": [],
             "id": null,
             "newExpediente": {
                 "asunto": "",
@@ -43901,6 +43902,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 "fechaAlta": "",
                 "fechaHasta": "",
                 "area": "",
+                "estado": "",
                 "presupuesto": "",
                 "lugar": "",
                 "comentario": "",
@@ -43914,6 +43916,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     created: function created() {
         this.init();
         this.getArea();
+        this.getEstado();
     },
 
     mounted: function mounted() {
@@ -43953,13 +43956,24 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             });
         },
 
+        getEstado: function getEstado() {
+            var _this3 = this;
+
+            var url = '/estado';
+            axios.get(url).then(function (response) {
+                _this3.estados = response.data;
+            }).catch(function (error) {
+                console.log(error);
+            });
+        },
+
         UpdateValue: function UpdateValue() {
             console.log(this.newExpediente);
             $('#create').modal('hide');
         },
 
         createExp: function createExp() {
-            var _this3 = this;
+            var _this4 = this;
 
             var url = '/expediente';
             console.log(this.newExpediente.asunto);
@@ -43967,24 +43981,25 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 'expediente': this.newExpediente
             }).then(function (response) {
                 //                        this.getExp();
-                _this3.newExpediente = '';
-                _this3.erros = [];
+                _this4.newExpediente = '';
+                _this4.erros = [];
                 $('#create').modal('hide');
                 toastr.success('Expediente Cargado');
             }).catch(function (error) {
-                _this3.error = error.response.data;
-                console.log(error);
+                _this4.error = error.response.data.message;
+                toastr.warning(error.response.data);
+                _this4.errors = '';
             });
         },
 
         editExpt: function editExpt(id) {
-            var _this4 = this;
+            var _this5 = this;
 
             var url = 'expediente/' + id;
             axios.get(url).then(function (response) {
-                _this4.newExpediente = response.data;
+                _this5.newExpediente = response.data;
             }).catch(function (error) {
-                _this4.error = eorror.response.data;
+                _this5.error = eorror.response.data;
             });
         }
 
@@ -44613,11 +44628,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 
-    props: ['newExpediente', 'areas', 'errors'],
+    props: ['newExpediente', 'areas', 'estados', 'errors'],
 
     methods: {
         expediente: function expediente(newExpediente) {
@@ -44841,6 +44863,62 @@ var render = function() {
                         return _c("option", { domProps: { value: area.id } }, [
                           _vm._v(_vm._s(area.area))
                         ])
+                      })
+                    ],
+                    2
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { attrs: { id: "estado" } }, [
+                  _c("label", { attrs: { for: "selectestado" } }, [
+                    _vm._v("Estado")
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "select",
+                    {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.newExpediente.estado,
+                          expression: "newExpediente.estado"
+                        }
+                      ],
+                      attrs: { name: "selecestado", id: "selectestado" },
+                      on: {
+                        change: function($event) {
+                          var $$selectedVal = Array.prototype.filter
+                            .call($event.target.options, function(o) {
+                              return o.selected
+                            })
+                            .map(function(o) {
+                              var val = "_value" in o ? o._value : o.value
+                              return val
+                            })
+                          _vm.$set(
+                            _vm.newExpediente,
+                            "estado",
+                            $event.target.multiple
+                              ? $$selectedVal
+                              : $$selectedVal[0]
+                          )
+                        }
+                      }
+                    },
+                    [
+                      _c(
+                        "option",
+                        { attrs: { selected: "", disabled: "", value: "" } },
+                        [_vm._v("Choose your make")]
+                      ),
+                      _vm._v(" "),
+                      _vm._l(_vm.estados, function(estado) {
+                        return _c(
+                          "option",
+                          { domProps: { value: estado.id } },
+                          [_vm._v(_vm._s(estado.estado))]
+                        )
                       })
                     ],
                     2
@@ -45187,7 +45265,7 @@ var render = function() {
             label: "form",
             newExpediente: _vm.newExpediente,
             areas: _vm.areas,
-            errors: _vm.errors
+            estados: _vm.estados
           },
           on: { expe: _vm.createExp }
         }),
@@ -45196,7 +45274,8 @@ var render = function() {
           attrs: {
             label: "form",
             newExpediente: _vm.newExpediente,
-            areas: _vm.areas
+            areas: _vm.areas,
+            estados: _vm.estados
           },
           on: { expediente: _vm.UpdateValue }
         })
