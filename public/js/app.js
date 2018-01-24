@@ -11635,7 +11635,7 @@ function applyToTag (styleElement, obj) {
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(14);
-module.exports = __webpack_require__(72);
+module.exports = __webpack_require__(66);
 
 
 /***/ }),
@@ -11661,8 +11661,8 @@ window.Vue = __webpack_require__(40);
 
 Vue.component('example', __webpack_require__(43));
 Vue.component('dash', __webpack_require__(46));
-Vue.component('dashArea', __webpack_require__(58));
-Vue.component('dashestados', __webpack_require__(61));
+Vue.component('dashArea', __webpack_require__(52));
+Vue.component('dashestados', __webpack_require__(55));
 
 var app = new Vue({
   el: '#app'
@@ -43633,7 +43633,7 @@ var normalizeComponent = __webpack_require__(1)
 /* script */
 var __vue_script__ = __webpack_require__(50)
 /* template */
-var __vue_template__ = __webpack_require__(57)
+var __vue_template__ = __webpack_require__(51)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -43747,1355 +43747,12 @@ module.exports = function listToStyles (parentId, list) {
 
 /***/ }),
 /* 50 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports) {
 
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__child_expedit__ = __webpack_require__(51);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__child_expedit___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__child_expedit__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__child_expnew__ = __webpack_require__(54);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__child_expnew___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__child_expnew__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-    components: {
-        ventana: __WEBPACK_IMPORTED_MODULE_0__child_expedit___default.a,
-        expNew: __WEBPACK_IMPORTED_MODULE_1__child_expnew___default.a
-
-    },
-
-    data: function data() {
-        return {
-            "pager": '',
-            "expediente": [],
-            "areas": [],
-            "estados": [],
-            "id": null,
-            "newExpediente": {
-                "asunto": "",
-                "comitente": "",
-                "destinatario": "",
-                "fechaAlta": "",
-                "fechaHasta": "",
-                "area": "",
-                "estado": "",
-                "presupuesto": "",
-                "lugar": "",
-                "comentario": "",
-                "tags": ""
-            },
-            "errors": []
-        };
-    },
-
-
-    created: function created() {
-        this.init();
-        this.getArea();
-        this.getEstado();
-    },
-
-    mounted: function mounted() {
-        console.log('Componente montado');
-    },
-
-    computed: {},
-
-    methods: {
-        init: function init() {
-            var page = 1;
-            if (typeof this.page !== 'undefinied') {
-                page = this.page;
-            }
-            this.getExp(page);
-        },
-
-        getExp: function getExp(page) {
-            var _this = this;
-
-            var url = '/expediente?page=' + page;
-            axios.get(url).then(function (response) {
-                _this.expediente = response.data.data;
-                _this.pager = response.data;
-            }).catch(function (error) {
-                console.log(error);
-            });
-        },
-        getArea: function getArea() {
-            var _this2 = this;
-
-            var url = '/area/';
-            axios.get(url).then(function (response) {
-                _this2.areas = response.data;
-            }).catch(function (error) {
-                console.log(error);
-            });
-        },
-
-        getEstado: function getEstado() {
-            var _this3 = this;
-
-            var url = '/estado';
-            axios.get(url).then(function (response) {
-                _this3.estados = response.data;
-            }).catch(function (error) {
-                console.log(error);
-            });
-        },
-
-        UpdateValue: function UpdateValue() {
-            console.log(this.newExpediente);
-            $('#create').modal('hide');
-        },
-
-        createExp: function createExp() {
-            var _this4 = this;
-
-            var url = '/expediente';
-            console.log(this.newExpediente.asunto);
-            axios.post(url, {
-                'expediente': this.newExpediente
-            }).then(function (response) {
-                //                        this.getExp();
-                _this4.newExpediente = '';
-                _this4.erros = [];
-                $('#create').modal('hide');
-                toastr.success('Expediente Cargado');
-            }).catch(function (error) {
-                _this4.error = error.response.data.message;
-                toastr.warning(error.response.data);
-                _this4.errors = '';
-            });
-        },
-
-        editExpt: function editExpt(id) {
-            var _this5 = this;
-
-            var url = 'expediente/' + id;
-            axios.get(url).then(function (response) {
-                _this5.newExpediente = response.data;
-            }).catch(function (error) {
-                _this5.error = eorror.response.data;
-            });
-        }
-
-    }
-
-});
+throw new Error("Module build failed: SyntaxError: Unexpected token (177:36)\n\n\u001b[0m \u001b[90m 175 | \u001b[39m         init\u001b[33m:\u001b[39m \u001b[36mfunction\u001b[39m(){\n \u001b[90m 176 | \u001b[39m             \u001b[36mvar\u001b[39m page \u001b[33m=\u001b[39m \u001b[35m1\u001b[39m\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 177 | \u001b[39m             newExpediente\u001b[33m.\u001b[39musuario\u001b[33m=\u001b[39m{{\u001b[33mAuth\u001b[39m\u001b[33m:\u001b[39m\u001b[33m:\u001b[39mid()}}\u001b[33m;\u001b[39m\n \u001b[90m     | \u001b[39m                                    \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 178 | \u001b[39m             \u001b[36mif\u001b[39m (\u001b[36mtypeof\u001b[39m(\u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mpage) \u001b[33m!==\u001b[39m \u001b[32m'undefinied'\u001b[39m){\n \u001b[90m 179 | \u001b[39m                 page \u001b[33m=\u001b[39m \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mpage\n \u001b[90m 180 | \u001b[39m             }\u001b[0m\n");
 
 /***/ }),
 /* 51 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-var normalizeComponent = __webpack_require__(1)
-/* script */
-var __vue_script__ = __webpack_require__(52)
-/* template */
-var __vue_template__ = __webpack_require__(53)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources/assets/js/components/child/expedit.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-481215a6", Component.options)
-  } else {
-    hotAPI.reload("data-v-481215a6", Component.options)
-' + '  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 52 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-
-    props: ['newExpediente', 'areas'],
-
-    methods: {
-        expediente: function expediente(newExpediente) {
-            this.$emit('expediente', this.newExpediente);
-        }
-    }
-});
-
-/***/ }),
-/* 53 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "row" }, [
-    _c("div", { staticClass: "modal fade", attrs: { id: "editexp" } }, [
-      _c("form", [
-        _c("div", { staticClass: "modal-dialog modal-lg" }, [
-          _c("div", { staticClass: "modal-content" }, [
-            _vm._m(0, false, false),
-            _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "modal-body" },
-              [
-                _c("h4", [_vm._v("Nuevo Expediente")]),
-                _vm._v(" "),
-                _c("label", { attrs: { for: "comitente" } }, [
-                  _vm._v("Asunto")
-                ]),
-                _vm._v(" "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.newExpediente.asunto,
-                      expression: "newExpediente.asunto"
-                    }
-                  ],
-                  staticClass: "form-control",
-                  attrs: { type: "text", name: "asunto" },
-                  domProps: { value: _vm.newExpediente.asunto },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(_vm.newExpediente, "asunto", $event.target.value)
-                    }
-                  }
-                }),
-                _vm._v(" "),
-                _c("label", { attrs: { for: "destinatario" } }, [
-                  _vm._v("Comitente")
-                ]),
-                _vm._v(" "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.newExpediente.comitente,
-                      expression: "newExpediente.comitente"
-                    }
-                  ],
-                  staticClass: "form-control",
-                  attrs: { type: "text", name: "comitente" },
-                  domProps: { value: _vm.newExpediente.comitente },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(
-                        _vm.newExpediente,
-                        "comitente",
-                        $event.target.value
-                      )
-                    }
-                  }
-                }),
-                _vm._v(" "),
-                _c("label", { attrs: { for: "asunto" } }, [
-                  _vm._v("Destinatario")
-                ]),
-                _vm._v(" "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.newExpediente.destinatario,
-                      expression: "newExpediente.destinatario"
-                    }
-                  ],
-                  staticClass: "form-control",
-                  attrs: { type: "text", name: "destinatario" },
-                  domProps: { value: _vm.newExpediente.destinatario },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(
-                        _vm.newExpediente,
-                        "destinatario",
-                        $event.target.value
-                      )
-                    }
-                  }
-                }),
-                _vm._v(" "),
-                _c("label", { attrs: { for: "fechaAlta" } }, [
-                  _vm._v("Fecha:")
-                ]),
-                _vm._v(" "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.newExpediente.fechaAlta,
-                      expression: "newExpediente.fechaAlta"
-                    }
-                  ],
-                  staticClass: "form-control",
-                  attrs: { type: "date", name: "fechaAlta" },
-                  domProps: { value: _vm.newExpediente.fechaAlta },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(
-                        _vm.newExpediente,
-                        "fechaAlta",
-                        $event.target.value
-                      )
-                    }
-                  }
-                }),
-                _vm._v(" "),
-                _c("label", { attrs: { for: "fechaHasta" } }, [
-                  _vm._v("Fecha de Realizarce")
-                ]),
-                _vm._v(" "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.newExpediente.fechaHasta,
-                      expression: "newExpediente.fechaHasta"
-                    }
-                  ],
-                  staticClass: "form-control",
-                  attrs: { type: "date", name: "fechaHasta" },
-                  domProps: { value: _vm.newExpediente.fechaHasta },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(
-                        _vm.newExpediente,
-                        "fechaHasta",
-                        $event.target.value
-                      )
-                    }
-                  }
-                }),
-                _vm._v(" "),
-                _c("div", { attrs: { id: "area" } }, [
-                  _c("label", { attrs: { for: "selectarea" } }, [
-                    _vm._v("Area")
-                  ]),
-                  _vm._v(" "),
-                  _c(
-                    "select",
-                    {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.newExpediente.area,
-                          expression: "newExpediente.area"
-                        }
-                      ],
-                      attrs: { name: "selectarea", id: "selectarea" },
-                      on: {
-                        change: function($event) {
-                          var $$selectedVal = Array.prototype.filter
-                            .call($event.target.options, function(o) {
-                              return o.selected
-                            })
-                            .map(function(o) {
-                              var val = "_value" in o ? o._value : o.value
-                              return val
-                            })
-                          _vm.$set(
-                            _vm.newExpediente,
-                            "area",
-                            $event.target.multiple
-                              ? $$selectedVal
-                              : $$selectedVal[0]
-                          )
-                        }
-                      }
-                    },
-                    [
-                      _c(
-                        "option",
-                        { attrs: { selected: "", disabled: "", value: "" } },
-                        [_vm._v("Choose your make")]
-                      ),
-                      _vm._v(" "),
-                      _vm._l(_vm.areas, function(area) {
-                        return _c("option", { domProps: { value: area.id } }, [
-                          _vm._v(_vm._s(area.area))
-                        ])
-                      })
-                    ],
-                    2
-                  )
-                ]),
-                _vm._v(" "),
-                _c("label", { attrs: { for: "presupuesto" } }, [
-                  _vm._v("Presupuesto")
-                ]),
-                _vm._v(" "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.newExpediente.presupuesto,
-                      expression: "newExpediente.presupuesto"
-                    }
-                  ],
-                  staticClass: "form-control",
-                  attrs: { type: "text", name: "presupuesto" },
-                  domProps: { value: _vm.newExpediente.presupuesto },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(
-                        _vm.newExpediente,
-                        "presupuesto",
-                        $event.target.value
-                      )
-                    }
-                  }
-                }),
-                _vm._v(" "),
-                _c("label", { attrs: { for: "lugar" } }, [_vm._v("Lugar")]),
-                _vm._v(" "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.newExpediente.lugar,
-                      expression: "newExpediente.lugar"
-                    }
-                  ],
-                  staticClass: "form-control",
-                  attrs: { type: "text", name: "lugar" },
-                  domProps: { value: _vm.newExpediente.lugar },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(_vm.newExpediente, "lugar", $event.target.value)
-                    }
-                  }
-                }),
-                _vm._v(" "),
-                _c("label", { attrs: { for: "tags" } }, [_vm._v("Tags")]),
-                _vm._v(" "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.newExpediente.tags,
-                      expression: "newExpediente.tags"
-                    }
-                  ],
-                  staticClass: "form-control",
-                  attrs: { type: "text", name: "tags" },
-                  domProps: { value: _vm.newExpediente.tags },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(_vm.newExpediente, "tags", $event.target.value)
-                    }
-                  }
-                }),
-                _vm._v(" "),
-                _c("label", { attrs: { for: "commnet" } }, [
-                  _vm._v("Comentarios")
-                ]),
-                _vm._v(" "),
-                _c("textarea", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.newExpediente.comentario,
-                      expression: "newExpediente.comentario"
-                    }
-                  ],
-                  staticClass: "form-control",
-                  attrs: { rows: "5", id: "comment" },
-                  domProps: { value: _vm.newExpediente.comentario },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(
-                        _vm.newExpediente,
-                        "comentario",
-                        $event.target.value
-                      )
-                    }
-                  }
-                }),
-                _vm._v(" "),
-                _vm._l(_vm.errors, function(error) {
-                  return _c("span", { staticClass: "text-danger" }, [
-                    _vm._v(_vm._s(error))
-                  ])
-                })
-              ],
-              2
-            ),
-            _vm._v(" "),
-            _c("div", { staticClass: "modal-footer" }, [
-              _c(
-                "button",
-                {
-                  staticClass: "btn btn-primary",
-                  attrs: { value: "Guardar" },
-                  on: {
-                    click: function($event) {
-                      $event.preventDefault()
-                      _vm.expediente($event)
-                    }
-                  }
-                },
-                [
-                  _vm._v(
-                    "\n                            Guardar\n                        "
-                  )
-                ]
-              )
-            ])
-          ])
-        ])
-      ])
-    ])
-  ])
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-header" }, [
-      _c(
-        "button",
-        {
-          staticClass: "close",
-          attrs: { type: "button", "data-dismiss": "modal" }
-        },
-        [_c("span", [_vm._v("×")])]
-      )
-    ])
-  }
-]
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-481215a6", module.exports)
-  }
-}
-
-/***/ }),
-/* 54 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-var normalizeComponent = __webpack_require__(1)
-/* script */
-var __vue_script__ = __webpack_require__(55)
-/* template */
-var __vue_template__ = __webpack_require__(56)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources/assets/js/components/child/expnew.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-50e6c54d", Component.options)
-  } else {
-    hotAPI.reload("data-v-50e6c54d", Component.options)
-' + '  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 55 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-
-    props: ['newExpediente', 'areas', 'estados', 'errors'],
-
-    methods: {
-        expediente: function expediente(newExpediente) {
-            this.$emit('expe', this.newExpediente);
-        }
-    }
-});
-
-/***/ }),
-/* 56 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "row" }, [
-    _c("div", { staticClass: "modal fade", attrs: { id: "create" } }, [
-      _c("form", [
-        _c("div", { staticClass: "modal-dialog modal-lg" }, [
-          _c("div", { staticClass: "modal-content" }, [
-            _vm._m(0, false, false),
-            _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "modal-body" },
-              [
-                _c("h4", [_vm._v("Nuevo Expediente")]),
-                _vm._v(" "),
-                _c("label", { attrs: { for: "comitente" } }, [
-                  _vm._v("Asunto")
-                ]),
-                _vm._v(" "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.newExpediente.asunto,
-                      expression: "newExpediente.asunto"
-                    }
-                  ],
-                  staticClass: "form-control",
-                  attrs: { type: "text", name: "asunto" },
-                  domProps: { value: _vm.newExpediente.asunto },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(_vm.newExpediente, "asunto", $event.target.value)
-                    }
-                  }
-                }),
-                _vm._v(" "),
-                _c("label", { attrs: { for: "destinatario" } }, [
-                  _vm._v("Comitente")
-                ]),
-                _vm._v(" "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.newExpediente.comitente,
-                      expression: "newExpediente.comitente"
-                    }
-                  ],
-                  staticClass: "form-control",
-                  attrs: { type: "text", name: "comitente" },
-                  domProps: { value: _vm.newExpediente.comitente },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(
-                        _vm.newExpediente,
-                        "comitente",
-                        $event.target.value
-                      )
-                    }
-                  }
-                }),
-                _vm._v(" "),
-                _c("label", { attrs: { for: "asunto" } }, [
-                  _vm._v("Destinatario")
-                ]),
-                _vm._v(" "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.newExpediente.destinatario,
-                      expression: "newExpediente.destinatario"
-                    }
-                  ],
-                  staticClass: "form-control",
-                  attrs: { type: "text", name: "destinatario" },
-                  domProps: { value: _vm.newExpediente.destinatario },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(
-                        _vm.newExpediente,
-                        "destinatario",
-                        $event.target.value
-                      )
-                    }
-                  }
-                }),
-                _vm._v(" "),
-                _c("label", { attrs: { for: "fechaAlta" } }, [
-                  _vm._v("Fecha:")
-                ]),
-                _vm._v(" "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.newExpediente.fechaAlta,
-                      expression: "newExpediente.fechaAlta"
-                    }
-                  ],
-                  staticClass: "form-control",
-                  attrs: { type: "date", name: "fechaAlta" },
-                  domProps: { value: _vm.newExpediente.fechaAlta },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(
-                        _vm.newExpediente,
-                        "fechaAlta",
-                        $event.target.value
-                      )
-                    }
-                  }
-                }),
-                _vm._v(" "),
-                _c("label", { attrs: { for: "fechaHasta" } }, [
-                  _vm._v("Fecha de Realizarce")
-                ]),
-                _vm._v(" "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.newExpediente.fechaHasta,
-                      expression: "newExpediente.fechaHasta"
-                    }
-                  ],
-                  staticClass: "form-control",
-                  attrs: { type: "date", name: "fechaHasta" },
-                  domProps: { value: _vm.newExpediente.fechaHasta },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(
-                        _vm.newExpediente,
-                        "fechaHasta",
-                        $event.target.value
-                      )
-                    }
-                  }
-                }),
-                _vm._v(" "),
-                _c("div", { attrs: { id: "area" } }, [
-                  _c("label", { attrs: { for: "selectarea" } }, [
-                    _vm._v("Area")
-                  ]),
-                  _vm._v(" "),
-                  _c(
-                    "select",
-                    {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.newExpediente.area,
-                          expression: "newExpediente.area"
-                        }
-                      ],
-                      attrs: { name: "selectarea", id: "selectarea" },
-                      on: {
-                        change: function($event) {
-                          var $$selectedVal = Array.prototype.filter
-                            .call($event.target.options, function(o) {
-                              return o.selected
-                            })
-                            .map(function(o) {
-                              var val = "_value" in o ? o._value : o.value
-                              return val
-                            })
-                          _vm.$set(
-                            _vm.newExpediente,
-                            "area",
-                            $event.target.multiple
-                              ? $$selectedVal
-                              : $$selectedVal[0]
-                          )
-                        }
-                      }
-                    },
-                    [
-                      _c(
-                        "option",
-                        { attrs: { selected: "", disabled: "", value: "" } },
-                        [_vm._v("Choose your make")]
-                      ),
-                      _vm._v(" "),
-                      _vm._l(_vm.areas, function(area) {
-                        return _c("option", { domProps: { value: area.id } }, [
-                          _vm._v(_vm._s(area.area))
-                        ])
-                      })
-                    ],
-                    2
-                  )
-                ]),
-                _vm._v(" "),
-                _c("div", { attrs: { id: "estado" } }, [
-                  _c("label", { attrs: { for: "selectestado" } }, [
-                    _vm._v("Estado")
-                  ]),
-                  _vm._v(" "),
-                  _c(
-                    "select",
-                    {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.newExpediente.estado,
-                          expression: "newExpediente.estado"
-                        }
-                      ],
-                      attrs: { name: "selecestado", id: "selectestado" },
-                      on: {
-                        change: function($event) {
-                          var $$selectedVal = Array.prototype.filter
-                            .call($event.target.options, function(o) {
-                              return o.selected
-                            })
-                            .map(function(o) {
-                              var val = "_value" in o ? o._value : o.value
-                              return val
-                            })
-                          _vm.$set(
-                            _vm.newExpediente,
-                            "estado",
-                            $event.target.multiple
-                              ? $$selectedVal
-                              : $$selectedVal[0]
-                          )
-                        }
-                      }
-                    },
-                    [
-                      _c(
-                        "option",
-                        { attrs: { selected: "", disabled: "", value: "" } },
-                        [_vm._v("Choose your make")]
-                      ),
-                      _vm._v(" "),
-                      _vm._l(_vm.estados, function(estado) {
-                        return _c(
-                          "option",
-                          { domProps: { value: estado.id } },
-                          [_vm._v(_vm._s(estado.estado))]
-                        )
-                      })
-                    ],
-                    2
-                  )
-                ]),
-                _vm._v(" "),
-                _c("label", { attrs: { for: "presupuesto" } }, [
-                  _vm._v("Presupuesto")
-                ]),
-                _vm._v(" "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.newExpediente.presupuesto,
-                      expression: "newExpediente.presupuesto"
-                    }
-                  ],
-                  staticClass: "form-control",
-                  attrs: { type: "text", name: "presupuesto" },
-                  domProps: { value: _vm.newExpediente.presupuesto },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(
-                        _vm.newExpediente,
-                        "presupuesto",
-                        $event.target.value
-                      )
-                    }
-                  }
-                }),
-                _vm._v(" "),
-                _c("label", { attrs: { for: "lugar" } }, [_vm._v("Lugar")]),
-                _vm._v(" "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.newExpediente.lugar,
-                      expression: "newExpediente.lugar"
-                    }
-                  ],
-                  staticClass: "form-control",
-                  attrs: { type: "text", name: "lugar" },
-                  domProps: { value: _vm.newExpediente.lugar },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(_vm.newExpediente, "lugar", $event.target.value)
-                    }
-                  }
-                }),
-                _vm._v(" "),
-                _c("label", { attrs: { for: "tags" } }, [_vm._v("Tags")]),
-                _vm._v(" "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.newExpediente.tags,
-                      expression: "newExpediente.tags"
-                    }
-                  ],
-                  staticClass: "form-control",
-                  attrs: { type: "text", name: "tags" },
-                  domProps: { value: _vm.newExpediente.tags },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(_vm.newExpediente, "tags", $event.target.value)
-                    }
-                  }
-                }),
-                _vm._v(" "),
-                _c("label", { attrs: { for: "commnet" } }, [
-                  _vm._v("Comentarios")
-                ]),
-                _vm._v(" "),
-                _c("textarea", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.newExpediente.comentario,
-                      expression: "newExpediente.comentario"
-                    }
-                  ],
-                  staticClass: "form-control",
-                  attrs: { rows: "5", id: "comment" },
-                  domProps: { value: _vm.newExpediente.comentario },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(
-                        _vm.newExpediente,
-                        "comentario",
-                        $event.target.value
-                      )
-                    }
-                  }
-                }),
-                _vm._v(" "),
-                _vm._l(_vm.errors, function(error) {
-                  return _c("span", { staticClass: "text-danger" }, [
-                    _vm._v(_vm._s(error))
-                  ])
-                })
-              ],
-              2
-            ),
-            _vm._v(" "),
-            _c("div", { staticClass: "modal-footer" }, [
-              _c(
-                "button",
-                {
-                  staticClass: "btn btn-primary",
-                  attrs: { value: "Guardar" },
-                  on: {
-                    click: function($event) {
-                      $event.preventDefault()
-                      _vm.expediente($event)
-                    }
-                  }
-                },
-                [
-                  _vm._v(
-                    "\n                            Guardar\n                        "
-                  )
-                ]
-              )
-            ])
-          ])
-        ])
-      ])
-    ])
-  ])
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-header" }, [
-      _c(
-        "button",
-        {
-          staticClass: "close",
-          attrs: { type: "button", "data-dismiss": "modal" }
-        },
-        [_c("span", [_vm._v("×")])]
-      )
-    ])
-  }
-]
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-50e6c54d", module.exports)
-  }
-}
-
-/***/ }),
-/* 57 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -45358,15 +44015,15 @@ if (false) {
 }
 
 /***/ }),
-/* 58 */
+/* 52 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(59)
+var __vue_script__ = __webpack_require__(53)
 /* template */
-var __vue_template__ = __webpack_require__(60)
+var __vue_template__ = __webpack_require__(54)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -45406,7 +44063,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 59 */
+/* 53 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -45565,7 +44222,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 60 */
+/* 54 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -46085,19 +44742,19 @@ if (false) {
 }
 
 /***/ }),
-/* 61 */
+/* 55 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(62)
+  __webpack_require__(56)
 }
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(64)
+var __vue_script__ = __webpack_require__(58)
 /* template */
-var __vue_template__ = __webpack_require__(71)
+var __vue_template__ = __webpack_require__(65)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -46137,13 +44794,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 62 */
+/* 56 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(63);
+var content = __webpack_require__(57);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -46163,7 +44820,7 @@ if(false) {
 }
 
 /***/ }),
-/* 63 */
+/* 57 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(11)(undefined);
@@ -46177,14 +44834,14 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 
 /***/ }),
-/* 64 */
+/* 58 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__child_estadoNew__ = __webpack_require__(65);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__child_estadoNew__ = __webpack_require__(59);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__child_estadoNew___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__child_estadoNew__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__child_editestado__ = __webpack_require__(68);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__child_editestado__ = __webpack_require__(62);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__child_editestado___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__child_editestado__);
 //
 //
@@ -46394,15 +45051,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 65 */
+/* 59 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(66)
+var __vue_script__ = __webpack_require__(60)
 /* template */
-var __vue_template__ = __webpack_require__(67)
+var __vue_template__ = __webpack_require__(61)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -46442,7 +45099,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 66 */
+/* 60 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -46497,7 +45154,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 67 */
+/* 61 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -46603,15 +45260,15 @@ if (false) {
 }
 
 /***/ }),
-/* 68 */
+/* 62 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(69)
+var __vue_script__ = __webpack_require__(63)
 /* template */
-var __vue_template__ = __webpack_require__(70)
+var __vue_template__ = __webpack_require__(64)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -46651,7 +45308,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 69 */
+/* 63 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -46712,7 +45369,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 70 */
+/* 64 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -46808,7 +45465,7 @@ if (false) {
 }
 
 /***/ }),
-/* 71 */
+/* 65 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -46944,7 +45601,7 @@ if (false) {
 }
 
 /***/ }),
-/* 72 */
+/* 66 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin

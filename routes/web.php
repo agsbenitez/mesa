@@ -17,15 +17,16 @@ Route::get('/', function () {
 
 Route::get('/MesaDeEntradas', function(){
     return view('mesadeentradas');
-});
+})->middleware('auth');
 Route::get('estados', function (){
-    return view('Estados/estados');
+    return view(' ');
 });
 
 
 Route::get('/vue', function(){
     return view('dash');
 });
+
 Route::resource('expediente', 'ExpedienteController');
 Route::resource('area', 'AreaController');
 Route::resource('estado', 'EstadoController', ['except' => 'show', 'create']);
@@ -36,7 +37,8 @@ Route::get('/Data', 'DatatablesController@getIndex')->name('datatable.getIndex')
 
 
 
-Route::get('grid', function (){
-    return view('grilla');
-});
 
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

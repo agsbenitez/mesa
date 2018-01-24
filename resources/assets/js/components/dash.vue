@@ -139,6 +139,7 @@
                  "estados": [],
                  "id":null,
                  "newExpediente":{
+                     "usuario":"",
                      "asunto":"",
                      "comitente":"",
                      "destinatario":"",
@@ -173,6 +174,7 @@
         methods: {
             init: function(){
                 var page = 1;
+                newExpediente.usuario={{Auth::id()}};
                 if (typeof(this.page) !== 'undefinied'){
                     page = this.page
                 }
@@ -219,7 +221,7 @@
 
             createExp: function () {
                      var url = '/expediente';
-                     console.log(this.newExpediente.asunto);
+                     console.log(this.newExpediente.usuario);
                      axios.post(url, {
                          'expediente': this.newExpediente
                      }).then(response => {
