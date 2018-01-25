@@ -1,5 +1,5 @@
 <template>
-    <div>
+        <div>
         <div class="row">
             <div class="col-md-10">
                 <h3 class="page-header text-center">Expedientes</h3>
@@ -174,7 +174,7 @@
         methods: {
             init: function(){
                 var page = 1;
-                newExpediente.usuario={{Auth::id()}};
+
                 if (typeof(this.page) !== 'undefinied'){
                     page = this.page
                 }
